@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+/* Hide scrollbar but KEEP scrolling */
+html {
+  scrollbar-width: none; /* Firefox */
+}
+
+body {
+  -ms-overflow-style: none; /* IE / Edge */
+  font-family: 'Raleway', sans-serif;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

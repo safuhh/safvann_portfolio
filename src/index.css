@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
 /* Hide scrollbar but KEEP scrolling */
 html {
   scrollbar-width: none; /* Firefox */

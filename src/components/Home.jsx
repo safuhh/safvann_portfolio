@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <section
       id="home"
-      className="relative min-h-[100svh] w-full overflow-hidden bg-black flex items-start pt-24 md:pt-32
+      className="relative min-h-[100svh] w-full overflow-hidden bg-black flex items-start pt-28 md:pt-36
 "
     >
       {/* 🔥 Background */}

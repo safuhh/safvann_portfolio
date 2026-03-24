@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <section
       id="home"
-      className="relative h-screen w-full overflow-hidden bg-black"
+      className="relative min-h-screen pt-20 w-full overflow-hidden bg-black"
     >
       {/* 🔥 Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -26,10 +26,10 @@ export default function HomePage() {
       </div>
 
       {/* 🌟 Content Wrapper */}
-      <div className="relative z-10 h-full w-full flex items-center">
+      <div className="relative z-10 w-full flex items-center min-h-[calc(100vh-80px)]">
         <div className="w-full px-6 md:px-14 xl:px-24 2xl:px-32">
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center h-full">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
 
             {/* LEFT SIDE */}
             <div className="space-y-6">
@@ -45,12 +45,14 @@ export default function HomePage() {
                 >
                   Crafting
                 </h1>
+
                 <h1
                   className="font-bold italic text-neutral-100"
                   style={{ fontSize: "clamp(2.4rem, 5vw, 5rem)" }}
                 >
                   Modern
                 </h1>
+
                 <h1
                   className="font-bold text-neutral-100"
                   style={{ fontSize: "clamp(2.4rem, 5vw, 5rem)" }}
@@ -112,6 +114,7 @@ export default function HomePage() {
         <p className="text-neutral-600 text-xs tracking-widest">SCROLL</p>
         <div className="w-px h-10 bg-gradient-to-b from-neutral-600 to-transparent"></div>
       </div>
+
     </section>
   );
 }

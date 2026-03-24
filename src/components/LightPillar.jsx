@@ -25,15 +25,24 @@ const LightPillar = ({
   const geometryRef = useRef(null);
   const mouseRef = useRef(new THREE.Vector2(0, 0));
   const timeRef = useRef(0);
+  const rotationSpeedRef = useRef(rotationSpeed); // Avoid stale closure
+  const isVisibleRef = useRef(true); // Pause render when off-screen
   const [webGLSupported, setWebGLSupported] = useState(true);
 
-  // Check WebGL support
+  // Check WebGL support + pause shader when scrolled away
   useEffect(() => {
     const canvas = document.createElement('canvas');
     const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
     if (!gl) {
       setWebGLSupported(false);
+      return;
     }
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
+      { threshold: 0.01 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -253,12 +262,14 @@ const LightPillar = ({
       const deltaTime = currentTime - lastTime;
 
       if (deltaTime >= frameTime) {
-        timeRef.current += 0.016 * rotationSpeed;
-        const t = timeRef.current;
-        materialRef.current.uniforms.uTime.value = t;
-        materialRef.current.uniforms.uRotCos.value = Math.cos(t * 0.3);
-        materialRef.current.uniforms.uRotSin.value = Math.sin(t * 0.3);
-        rendererRef.current.render(sceneRef.current, cameraRef.current);
+        if (isVisibleRef.current) { // Only render when visible
+          timeRef.current += 0.016 * rotationSpeedRef.current;
+          const t = timeRef.current;
+          materialRef.current.uniforms.uTime.value = t;
+          materialRef.current.uniforms.uRotCos.value = Math.cos(t * 0.3);
+          materialRef.current.uniforms.uRotSin.value = Math.sin(t * 0.3);
+          rendererRef.current.render(sceneRef.current, cameraRef.current);
+        }
         lastTime = currentTime - (deltaTime % frameTime);
       }
 
@@ -312,20 +323,27 @@ const LightPillar = ({
       geometryRef.current = null;
       rafRef.current = null;
     };
-  }, [
-    topColor,
-    bottomColor,
-    intensity,
-    rotationSpeed,
-    interactive,
-    glowAmount,
-    pillarWidth,
-    pillarHeight,
-    noiseIntensity,
-    pillarRotation,
-    webGLSupported,
-    quality
-  ]);
+  }, [webGLSupported, quality]); // Only reinit WebGL on these changes
+
+  // Prop updates — update uniforms directly without recreating WebGL context
+  useEffect(() => {
+    if (!materialRef.current) return;
+    const c = (hex) => { const col = new THREE.Color(hex); return new THREE.Vector3(col.r, col.g, col.b); };
+    materialRef.current.uniforms.uTopColor.value = c(topColor);
+    materialRef.current.uniforms.uBottomColor.value = c(bottomColor);
+    materialRef.current.uniforms.uIntensity.value = intensity;
+    materialRef.current.uniforms.uGlowAmount.value = glowAmount;
+    materialRef.current.uniforms.uPillarWidth.value = pillarWidth;
+    materialRef.current.uniforms.uPillarHeight.value = pillarHeight;
+    materialRef.current.uniforms.uNoiseIntensity.value = noiseIntensity;
+    materialRef.current.uniforms.uInteractive.value = interactive;
+    const rad = (pillarRotation * Math.PI) / 180;
+    materialRef.current.uniforms.uPillarRotCos.value = Math.cos(rad);
+    materialRef.current.uniforms.uPillarRotSin.value = Math.sin(rad);
+  }, [topColor, bottomColor, intensity, glowAmount, pillarWidth, pillarHeight, noiseIntensity, interactive, pillarRotation]);
+
+  // Keep rotationSpeed ref in sync without triggering re-init
+  useEffect(() => { rotationSpeedRef.current = rotationSpeed; }, [rotationSpeed]);
 
   if (!webGLSupported) {
     return (

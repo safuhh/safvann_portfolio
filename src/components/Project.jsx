@@ -1,13 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState('All Projects');
-  const [visibleItems, setVisibleItems] = useState(new Set());
-  const observerRef = useRef(null);
-
-  const filters = [
-    'All Projects',
-  ];
 
   const projects = [
     {
@@ -15,7 +9,7 @@ export default function ProjectsSection() {
       title: 'Developer Portfolio',
       year: '2025',
       category: 'Frontend',
-      image: "/portfolio.png",
+      image: "/portfolio.jpg",
       url: null
     },
     {
@@ -23,7 +17,7 @@ export default function ProjectsSection() {
       title: 'E-Commerce Platform',
       year: '2025',
       category: 'Full Stack',
-      image: '/prowellHome.png',
+      image: '/prowellHome.jpg',
       url: 'https://prowellfitness.vercel.app/'
     },
     {
@@ -31,10 +25,12 @@ export default function ProjectsSection() {
       title: 'Strevia Streaming',
       year: '2026',
       category: 'Full Stack',
-      image: '/Strevia.png',
+      image: '/Strevia.jpg',
       url: 'https://strevia-streaming.vercel.app/'
     },
   ];
+
+  const filters = ['All Projects', ...new Set(projects.map((p) => p.category))];
 
   const filteredProjects =
     activeFilter === 'All Projects'
@@ -42,48 +38,31 @@ export default function ProjectsSection() {
       : projects.filter((project) => project.category === activeFilter);
 
   useEffect(() => {
-    observerRef.current = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const id = entry.target.dataset.id;
           if (entry.isIntersecting) {
-            // Add to visible items when entering viewport
-            setVisibleItems(
-              (prev) => new Set([...prev, id])
-            );
+            entry.target.classList.add('active');
           } else {
-            // Remove from visible items when leaving viewport
-            setVisibleItems((prev) => {
-              const newSet = new Set(prev);
-              newSet.delete(id);
-              return newSet;
-            });
+            entry.target.classList.remove('active');
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
     );
 
-    const elements = document.querySelectorAll('[data-animate]');
-    elements.forEach((el) => observerRef.current.observe(el));
+    const elements = document.querySelectorAll('.reveal');
+    elements.forEach((el) => observer.observe(el));
 
-    return () => observerRef.current?.disconnect();
-  }, []);
+    return () => observer.disconnect();
+  }, [activeFilter, filteredProjects]); // Re-observe when items change
 
   return (
     <section id="projects" className="min-h-screen relative overflow-hidden">
       <div className="max-w-[1600px] mx-auto px-5 md:px-12 lg:px-24 py-20 relative z-10">
 
         {/* Header */}
-        <div
-          data-animate
-          data-id="header"
-          className={`text-center mb-16 transition-all duration-1000 ${
-            visibleItems.has('header')
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-10'
-          }`}
-        >
+        <div className="text-center mb-16 reveal">
           <p className="text-neutral-500 tracking-[0.3em] text-sm uppercase mb-6">
             — PORTFOLIO —
           </p>
@@ -99,15 +78,7 @@ export default function ProjectsSection() {
         </div>
 
         {/* Filters */}
-        <div
-          data-animate
-          data-id="filters"
-          className={`flex flex-wrap justify-center gap-3 mb-16 transition-all duration-1000 delay-200 ${
-            visibleItems.has('filters')
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-10'
-          }`}
-        >
+        <div className="flex flex-wrap justify-center gap-3 mb-16 reveal">
           {filters.map((filter) => (
             <button
               key={filter}
@@ -128,13 +99,7 @@ export default function ProjectsSection() {
           {filteredProjects.map((project, index) => (
             <div
               key={project.id}
-              data-animate
-              data-id={`project-${project.id}`}
-              className={`group transition-all duration-700 ${
-                visibleItems.has(`project-${project.id}`)
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-10'
-              }`}
+              className="group reveal"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div className="bg-neutral-900/40 border border-neutral-700 rounded-lg overflow-hidden hover:border-neutral-500 transition-all">

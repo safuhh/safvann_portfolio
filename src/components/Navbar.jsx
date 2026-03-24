@@ -35,25 +35,31 @@ export default function Navbar() {
       document.querySelector(item.target)
     );
 
+    let rafId;
     const onScroll = () => {
-      const scrollPos = window.scrollY + 120;
+      if (rafId) return;
 
-      sections.forEach((section, index) => {
-        if (!section) return;
-
-        const top = section.offsetTop;
-        const height = section.offsetHeight;
-
-        if (scrollPos >= top && scrollPos < top + height) {
-          setActiveIndex(index);
-        }
+      rafId = requestAnimationFrame(() => {
+        const scrollPos = window.scrollY + 120;
+        sections.forEach((section, index) => {
+          if (!section) return;
+          const top = section.offsetTop;
+          const height = section.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveIndex(index);
+          }
+        });
+        rafId = null;
       });
     };
 
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
@@ -93,8 +99,10 @@ export default function Navbar() {
 
           {/* MOBILE MENU BUTTON */}
           <button
-            className="md:hidden text-neutral-100 text-xl"
+            className="md:hidden text-neutral-100 text-xl p-2 hover:bg-neutral-800/50 rounded-lg transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
           >
             {menuOpen ? "✕" : "☰"}
           </button>

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, MapPin, Phone, Send, Github, Linkedin, Twitter, Instagram } from 'lucide-react';
-import { motion } from "framer-motion";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -45,26 +44,24 @@ export default function ContactSection() {
     setSubmitStatus({ type: '', message: '' });
 
     try {
-      // Using EmailJS
-const response = await fetch(
-  'https://api.emailjs.com/api/v1.0/email/send',
-  {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      service_id: 'service_8il2sh1',
-      template_id: 'template_v8pvmmh',
-      user_id: '2KJkN5doDMaB1qXi8',
-      template_params: {
-        name: formData.name,
-        email: formData.email,
-        subject: formData.subject,
-        message: formData.message
-      }
-    })
-  }
-);
-
+      const response = await fetch(
+        'https://api.emailjs.com/api/v1.0/email/send',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            service_id: 'service_8il2sh1',
+            template_id: 'template_v8pvmmh',
+            user_id: '2KJkN5doDMaB1qXi8',
+            template_params: {
+              name: formData.name,
+              email: formData.email,
+              subject: formData.subject,
+              message: formData.message
+            }
+          })
+        }
+      );
 
       if (response.ok) {
         setSubmitStatus({
@@ -86,6 +83,26 @@ const response = await fetch(
     }
   };
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          } else {
+            entry.target.classList.remove('active');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll('.reveal');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [submitStatus.message]); // Re-observe if elements change (like status box)
+
   const contactInfo = [
     { Icon: Mail, title: "Email", info: "rihenww@gmail.com", href: "mailto:rihenww@gmail.com" },
     { Icon: Phone, title: "Phone", info: "+91 80756 08994", href: "tel:+918075608994" },
@@ -104,13 +121,7 @@ const response = await fetch(
       <div className="max-w-[1600px] mx-auto px-5 md:px-12 lg:px-20 xl:px-20 relative z-10">
 
         {/* HEADER */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: false }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16 reveal">
           <p className="text-neutral-500 tracking-[0.3em] text-sm uppercase mb-6">— GET IN TOUCH —</p>
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-100 leading-tight">
             Let's Work
@@ -118,19 +129,12 @@ const response = await fetch(
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-100 italic mt-2">
             Together
           </h2>
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
 
           {/* LEFT SIDE */}
-          <motion.div
-            initial={{ opacity: 0, x: -80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: false }}
-            className="space-y-8"
-          >
-
+          <div className="space-y-8 reveal reveal-left">
             <div>
               <h3 className="text-3xl font-bold text-neutral-100 mb-4">Have a project in mind?</h3>
               <p className="text-neutral-400 text-lg leading-relaxed">
@@ -143,16 +147,12 @@ const response = await fetch(
               {contactInfo.map((item, index) => {
                 const Icon = item.Icon;
                 return (
-                  <motion.a
+                  <a
                     key={index}
                     href={item.href}
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.15 }}
-                    viewport={{ once: false }}
-                    className="flex items-start space-x-4 p-5 bg-neutral-800/30 backdrop-blur-md 
-                      rounded-xl border border-neutral-700/50 hover:bg-neutral-800/50 
-                      hover:border-white hover:scale-105 transition-all duration-300 group"
+                    className="flex items-start space-x-4 p-5 bg-neutral-800 border border-neutral-700/50 hover:bg-neutral-800/80 
+                      rounded-xl border border-neutral-700/50 hover:border-white hover:scale-105 transition-all duration-300 group reveal reveal-left"
+                    style={{ transitionDelay: `${index * 100}ms` }}
                   >
                     <div className="w-12 h-12 rounded-lg bg-neutral-700/50 flex items-center justify-center group-hover:bg-neutral-600/50 transition-colors">
                       <Icon className="w-6 h-6 text-neutral-300" />
@@ -163,7 +163,7 @@ const response = await fetch(
                         {item.info}
                       </p>
                     </div>
-                  </motion.a>
+                  </a>
                 );
               })}
             </div>
@@ -179,59 +179,45 @@ const response = await fetch(
                 {socialLinks.map((social, index) => {
                   const Icon = social.Icon;
                   return (
-                    <motion.a
+                    <a
                       key={index}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: index * 0.15 }}
-                      viewport={{ once: false }}
-                      className="w-12 h-12 rounded-full bg-neutral-800/50 backdrop-blur-md 
+                      aria-label={`Follow on ${social.label}`}
+                      className="w-12 h-12 rounded-full bg-neutral-800 
                         flex items-center justify-center border border-neutral-700/50 
                         text-neutral-400 hover:text-neutral-100 hover:border-neutral-500 
-                        hover:scale-110 transition-all duration-300"
+                        hover:scale-110 transition-all duration-300 reveal"
+                      style={{ transitionDelay: `${index * 100}ms` }}
                     >
                       <Icon className="w-5 h-5" />
-                    </motion.a>
+                    </a>
                   );
                 })}
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* RIGHT SIDE — FORM */}
-          <motion.div
-            initial={{ opacity: 0, x: 80 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: false }}
-          >
-            <div className="bg-neutral-800/30 backdrop-blur-md rounded-2xl border border-neutral-700/50 p-8 space-y-6">
+          <div className="reveal reveal-right">
+            <div className="bg-neutral-800 border border-neutral-700/50 rounded-2xl p-8 space-y-6">
 
               {/* Status Message */}
               {submitStatus.message && (
-                <motion.div 
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`p-4 rounded-lg ${
+                <div 
+                  className={`p-4 rounded-lg transition-all duration-300 ${
                     submitStatus.type === 'success' 
                       ? 'bg-green-500/20 border border-green-500/50 text-green-200' 
                       : 'bg-red-500/20 border border-red-500/50 text-red-200'
                   }`}
                 >
                   {submitStatus.message}
-                </motion.div>
+                </div>
               )}
 
               {/* Name */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                viewport={{ once: false }}
-              >
+              <div className="reveal" style={{ transitionDelay: '100ms' }}>
                 <label className="block text-neutral-100 font-medium mb-2">Your Name *</label>
                 <input
                   type="text"
@@ -241,15 +227,10 @@ const response = await fetch(
                   className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-700/50 rounded-lg text-neutral-100 focus:ring-2 focus:ring-neutral-500/20 focus:outline-none"
                   placeholder="Enter Your Name"
                 />
-              </motion.div>
+              </div>
 
               {/* Email */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                viewport={{ once: false }}
-              >
+              <div className="reveal" style={{ transitionDelay: '200ms' }}>
                 <label className="block text-neutral-100 font-medium mb-2">Your Email *</label>
                 <input
                   type="email"
@@ -259,15 +240,10 @@ const response = await fetch(
                   className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-700/50 rounded-lg text-neutral-100 focus:ring-2 focus:ring-neutral-500/20 focus:outline-none"
                   placeholder="Enter Your Email"
                 />
-              </motion.div>
+              </div>
 
               {/* Subject */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-                viewport={{ once: false }}
-              >
+              <div className="reveal" style={{ transitionDelay: '300ms' }}>
                 <label className="block text-neutral-100 font-medium mb-2">Subject *</label>
                 <input
                   type="text"
@@ -277,15 +253,10 @@ const response = await fetch(
                   className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-700/50 rounded-lg text-neutral-100 focus:ring-2 focus:ring-neutral-500/20 focus:outline-none"
                   placeholder="Project Inquiry"
                 />
-              </motion.div>
+              </div>
 
               {/* Message */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-                viewport={{ once: false }}
-              >
+              <div className="reveal" style={{ transitionDelay: '400ms' }}>
                 <label className="block text-neutral-100 font-medium mb-2">Message *</label>
                 <textarea
                   name="message"
@@ -295,25 +266,23 @@ const response = await fetch(
                   className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-700/50 rounded-lg text-neutral-100 resize-none focus:ring-2 focus:ring-neutral-500/20 focus:outline-none"
                   placeholder="Tell me about your project..."
                 />
-              </motion.div>
+              </div>
 
               {/* Submit */}
-              <motion.button
-                type="button"
-                onClick={handleSubmit}
-                disabled={isSubmitting}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 1 }}
-                viewport={{ once: false }}
-                className="w-full px-6 py-4 bg-neutral-100 hover:bg-white text-black font-semibold rounded-lg flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-              >
-                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
-                {!isSubmitting && <Send className="w-5 h-5" />}
-              </motion.button>
+              <div className="reveal" style={{ transitionDelay: '500ms' }}>
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={isSubmitting}
+                  className="w-full px-6 py-4 bg-neutral-100 hover:bg-white text-black font-semibold rounded-lg flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                >
+                  <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                  {!isSubmitting && <Send className="w-5 h-5" />}
+                </button>
+              </div>
 
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

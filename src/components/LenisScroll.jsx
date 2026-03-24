@@ -6,18 +6,29 @@ export default function LenisScroll({ children }) {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      smooth: true,
+      lerp: 0.08,
+      wheelMultiplier: 0.9,
+      infinite: false,
+      gestureOrientation: 'vertical',
+      normalizeWheel: true,
+      smoothWheel: true
     });
 
+    window.lenis = lenis; // Expose for Navbar
+    document.documentElement.style.scrollBehavior = 'auto'; // Prevent native smooth scroll fighting Lenis
+
+    let rafId;
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
-    return () => lenis.destroy();
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+      window.lenis = null;
+    };
   }, []);
 
   return <>{children}</>;

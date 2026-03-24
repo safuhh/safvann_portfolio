@@ -1,9 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 
 export default function ExperienceSection() {
-  const [visibleItems, setVisibleItems] = useState(new Set());
-  const observerRef = useRef(null);
-
   const experiences = [
     {
       id: 1,
@@ -23,34 +20,23 @@ export default function ExperienceSection() {
   ];
 
   useEffect(() => {
-    observerRef.current = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const id = entry.target.dataset.id;
           if (entry.isIntersecting) {
-            // Add to visible items when entering viewport
-            setVisibleItems((prev) => new Set([...prev, id]));
+            entry.target.classList.add('active');
           } else {
-            // Remove from visible items when leaving viewport
-            setVisibleItems((prev) => {
-              const newSet = new Set(prev);
-              newSet.delete(id);
-              return newSet;
-            });
+            entry.target.classList.remove('active');
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
-    const elements = document.querySelectorAll('[data-animate]');
-    elements.forEach((el) => observerRef.current.observe(el));
+    const elements = document.querySelectorAll('.reveal');
+    elements.forEach((el) => observer.observe(el));
 
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -58,15 +44,7 @@ export default function ExperienceSection() {
       <div className="max-w-[1600px] mx-auto px-5 md:px-12 lg:px-24 xl:px-24 py-20 relative z-10">
         
         {/* Header */}
-        <div 
-          data-animate 
-          data-id="header"
-          className={`mb-20 transition-all duration-1000 ${
-            visibleItems.has('header') 
-              ? 'opacity-100 translate-y-0' 
-              : 'opacity-0 translate-y-10'
-          }`}
-        >
+        <div className="mb-20 reveal">
           <p className="text-neutral-500 tracking-[0.3em] text-sm uppercase mb-4">
             — PROFESSIONAL JOURNEY —
           </p>
@@ -91,19 +69,14 @@ export default function ExperienceSection() {
           {experiences.map((exp, index) => (
             <div 
               key={exp.id}
-              data-animate
-              data-id={`exp-${exp.id}`}
-              className={`relative mb-16 transition-all duration-1000 delay-${index * 200} ${
-                visibleItems.has(`exp-${exp.id}`)
-                  ? 'opacity-100 translate-x-0'
-                  : 'opacity-0 -translate-x-10'
-              }`}
+              className="relative mb-16 reveal reveal-left"
+              style={{ transitionDelay: `${index * 200}ms` }}
             >
               {/* Timeline Dot */}
               <div className="absolute left-0 md:left-8 -translate-x-1/2 w-4 h-4 bg-neutral-100 rounded-full border-4 border-black shadow-lg shadow-neutral-500/50"></div>
 
               {/* Content Card */}
-              <div className="ml-8 md:ml-20 bg-neutral-900/40 backdrop-blur-md border border-neutral-700/50 rounded-lg p-6 md:p-8 hover:border-neutral-500 hover:bg-neutral-800/50 transition-all duration-500">
+              <div className="ml-8 md:ml-20 bg-neutral-900/90 border border-neutral-700/50 rounded-lg p-6 md:p-8 hover:border-neutral-500 hover:bg-neutral-800 transition-all duration-500">
                 <div className="grid md:grid-cols-3 gap-8">
                   {/* Left Column - Main Info */}
                   <div className="md:col-span-2">
@@ -129,11 +102,8 @@ export default function ExperienceSection() {
                         {exp.responsibilities.map((resp, idx) => (
                           <li 
                             key={idx}
-                            className={`flex items-start text-neutral-400 transition-all duration-500 delay-${(index + idx + 1) * 100} ${
-                              visibleItems.has(`exp-${exp.id}`)
-                                ? 'opacity-100 translate-x-0'
-                                : 'opacity-0 -translate-x-5'
-                            }`}
+                            className="flex items-start text-neutral-400 reveal reveal-left"
+                            style={{ transitionDelay: `${(idx + 1) * 100}ms` }}
                           >
                             <span className="text-neutral-500 mr-3 mt-1">▹</span>
                             <span>{resp}</span>
@@ -152,12 +122,7 @@ export default function ExperienceSection() {
                       {exp.technologies.map((tech, idx) => (
                         <span
                           key={idx}
-                          className={`px-3 py-1.5 bg-neutral-800/50 border border-neutral-700 rounded text-xs text-neutral-300 hover:bg-neutral-100 hover:text-black hover:border-neutral-100 transition-all duration-300 cursor-default transform hover:scale-105 ${
-                            visibleItems.has(`exp-${exp.id}`)
-                              ? 'opacity-100 scale-100'
-                              : 'opacity-0 scale-90'
-                          }`}
-                          style={{ transitionDelay: `${(idx + 5) * 50}ms` }}
+                          className="px-3 py-1.5 bg-neutral-800/50 border border-neutral-700 rounded text-xs text-neutral-300 hover:bg-neutral-100 hover:text-black hover:border-neutral-100 transition-all duration-300 cursor-default transform hover:scale-105"
                         >
                           {tech}
                         </span>
@@ -171,13 +136,7 @@ export default function ExperienceSection() {
 
           {/* Timeline End Indicator */}
           <div 
-            data-animate
-            data-id="timeline-end"
-            className={`relative ml-8 md:ml-20 transition-all duration-1000 ${
-              visibleItems.has('timeline-end')
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-10'
-            }`}
+            className="relative ml-8 md:ml-20 reveal"
           >
             <div className="absolute left-0 md:left-8 -translate-x-1/2 w-3 h-3 bg-neutral-700 rounded-full border-4 border-black"></div>
             <p className="text-neutral-600 text-sm italic">More experiences coming soon...</p>

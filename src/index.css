@@ -18,3 +18,26 @@ body::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
+
+/* High-Performance Reveal Animations */
+.reveal {
+  opacity: 0 !important;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+.reveal.active {
+  opacity: 1 !important;
+  transform: translateY(0);
+  will-change: transform, opacity; /* Only promote when animating */
+  pointer-events: auto;
+}
+
+.reveal-left { transform: translateX(-30px); }
+.reveal-right { transform: translateX(30px); }
+
+.reveal.active.reveal-left, 
+.reveal.active.reveal-right {
+  transform: translateX(0);
+}

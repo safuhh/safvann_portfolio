@@ -32,7 +32,7 @@ export default function AboutSection() {
           <p className="font-body text-white/40 tracking-[0.3em] text-sm uppercase mb-6">
             — ABOUT ME —
           </p>
-          <h2 className="font-heading text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white leading-tight">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white leading-tight">
             The Story Behind
           </h2>
         </div>
@@ -61,8 +61,8 @@ export default function AboutSection() {
           {/* TEXT */}
           <div className="space-y-8 reveal reveal-right">
             {/* QUOTE */}
-            <div className="flex items-start space-x-4">
-              <div className="text-teal-400/20 text-5xl font-heading leading-none">
+            <div className="flex items-start space-x-3 sm:space-x-4">
+              <div className="text-teal-400/20 text-4xl sm:text-5xl font-heading leading-none">
                 "
               </div>
               <h3 className="font-heading text-2xl md:text-3xl font-bold text-white italic">

@@ -123,10 +123,10 @@ export default function ContactSection() {
         {/* HEADER */}
         <div className="text-center mb-16 reveal">
           <p className="text-neutral-500 tracking-[0.3em] text-sm uppercase mb-6">— GET IN TOUCH —</p>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-100 leading-tight">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-100 leading-tight">
             Let's Work
           </h2>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-100 italic mt-2">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-100 italic mt-2">
             Together
           </h2>
         </div>
@@ -136,7 +136,7 @@ export default function ContactSection() {
           {/* LEFT SIDE */}
           <div className="space-y-8 reveal reveal-left">
             <div>
-              <h3 className="text-3xl font-bold text-neutral-100 mb-4">Have a project in mind?</h3>
+              <h3 className="text-2xl md:text-3xl font-bold text-neutral-100 mb-4">Have a project in mind?</h3>
               <p className="text-neutral-400 text-lg leading-relaxed">
                 I'm always open to discussing new projects, creative ideas, or opportunities.
               </p>

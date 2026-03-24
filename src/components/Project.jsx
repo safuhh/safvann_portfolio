@@ -66,10 +66,10 @@ export default function ProjectsSection() {
           <p className="text-neutral-500 tracking-[0.3em] text-sm uppercase mb-6">
             — PORTFOLIO —
           </p>
-          <h1 className="text-5xl md:text-7xl font-bold text-neutral-100 mb-4">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-neutral-100 mb-4">
             Featured
           </h1>
-          <h1 className="text-5xl md:text-7xl font-bold text-neutral-100 mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-neutral-100 mb-8">
             Creative Works
           </h1>
           <p className="text-neutral-400 text-lg max-w-3xl mx-auto">
@@ -105,7 +105,7 @@ export default function ProjectsSection() {
               <div className="bg-neutral-900/40 border border-neutral-700 rounded-lg overflow-hidden hover:border-neutral-500 transition-all">
 
                 {/* Image */}
-                <div className="h-64 relative overflow-hidden bg-neutral-800">
+                <div className="h-48 sm:h-56 md:h-64 relative overflow-hidden bg-neutral-800">
                   {project.image ? (
                     <img
                       src={project.image}
@@ -121,7 +121,7 @@ export default function ProjectsSection() {
                 </div>
 
                 {/* Info */}
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <div className="flex justify-between mb-2">
                     <h3 className="text-xl font-bold text-neutral-100">
                       {project.title}

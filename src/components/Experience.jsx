@@ -48,10 +48,10 @@ export default function ExperienceSection() {
           <p className="text-neutral-500 tracking-[0.3em] text-sm uppercase mb-4">
             — PROFESSIONAL JOURNEY —
           </p>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-neutral-100 leading-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-neutral-100 leading-tight mb-6">
             Experience
           </h1>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-neutral-100 leading-tight italic mb-8">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-neutral-100 leading-tight italic mb-8">
             Timeline
           </h1>
           <p className="text-neutral-400 text-lg max-w-3xl leading-relaxed">
@@ -73,17 +73,17 @@ export default function ExperienceSection() {
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               {/* Timeline Dot */}
-              <div className="absolute left-0 md:left-8 -translate-x-1/2 w-4 h-4 bg-neutral-100 rounded-full border-4 border-black shadow-lg shadow-neutral-500/50"></div>
+              <div className="absolute left-0 md:left-8 -translate-x-1/2 w-3 h-3 md:w-4 md:h-4 bg-neutral-100 rounded-full border-4 border-black shadow-lg shadow-neutral-500/50"></div>
 
               {/* Content Card */}
-              <div className="ml-8 md:ml-20 bg-neutral-900/90 border border-neutral-700/50 rounded-lg p-6 md:p-8 hover:border-neutral-500 hover:bg-neutral-800 transition-all duration-500">
+              <div className="ml-6 md:ml-20 bg-neutral-900/90 border border-neutral-700/50 rounded-lg p-5 md:p-8 hover:border-neutral-500 hover:bg-neutral-800 transition-all duration-500">
                 <div className="grid md:grid-cols-3 gap-8">
                   {/* Left Column - Main Info */}
                   <div className="md:col-span-2">
                     <p className="text-neutral-500 tracking-[0.3em] text-xs uppercase mb-3 font-semibold">
                       {exp.period}
                     </p>
-                    <h2 className="text-3xl md:text-4xl font-bold mb-2 text-neutral-100">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 text-neutral-100">
                       {exp.title}
                     </h2>
                     <p className="text-xl text-neutral-300 mb-6">

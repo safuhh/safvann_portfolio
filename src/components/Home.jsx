@@ -5,8 +5,7 @@ export default function HomePage() {
   return (
     <section
       id="home"
-      className="relative min-h-[100svh] w-full overflow-hidden bg-black flex items-start pt-28 md:pt-36
-"
+      className="relative min-h-screen w-full overflow-hidden bg-black flex items-center"
     >
       {/* 🔥 Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -26,12 +25,12 @@ export default function HomePage() {
         />
       </div>
 
-      {/* 🌟 Content Wrapper (FULL WIDTH) */}
+      {/* 🌟 Content Wrapper */}
       <div className="relative z-10 w-full px-6 md:px-14 xl:px-24 2xl:px-32">
         <div className="grid lg:grid-cols-2 gap-16 items-center w-full">
 
           {/* LEFT SIDE */}
-          <div className="space-y-8">
+          <div className="space-y-8 lg:mt-16">
             <p className="text-neutral-500 tracking-[0.3em] uppercase text-sm">
               MERN Stack Developer
             </p>
@@ -101,8 +100,11 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* SCROLL INDICATOR */}
-      <div className="absolute bottom-15 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce">
+      {/* 🔥 Bottom Smooth Fade */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-black pointer-events-none"></div>
+
+      {/* ⬇ Scroll Indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce">
         <p className="text-neutral-600 text-xs tracking-widest">SCROLL</p>
         <div className="w-px h-12 bg-gradient-to-b from-neutral-600 to-transparent"></div>
       </div>

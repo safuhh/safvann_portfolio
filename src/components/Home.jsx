@@ -1,8 +1,44 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import LightPillar from "./LightPillar";
 
 export default function HomePage() {
+  const leftRef = useRef(null);
+  const rightRef = useRef(null);
+  const wordsRef = useRef([]);
+
+  useEffect(() => {
+    // Initial entrance animations with GSAP (runs once, no scroll overhead)
+    const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+
+    // Left side slides up
+    tl.fromTo(
+      leftRef.current,
+      { opacity: 0, y: 60 },
+      { opacity: 1, y: 0, duration: 1 }
+    );
+
+    // Heading words stagger in
+    tl.fromTo(
+      wordsRef.current,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.8, stagger: 0.2 },
+      "-=0.6"
+    );
+
+    // Right side slides from right
+    tl.fromTo(
+      rightRef.current,
+      { opacity: 0, x: 80 },
+      { opacity: 1, x: 0, duration: 1 },
+      "-=0.8"
+    );
+
+    return () => tl.kill();
+  }, []);
+
+  const words = ["Crafting", "Modern", "Web Apps"];
+
   return (
     <section
       id="home"
@@ -31,71 +67,48 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
 
             {/* LEFT SIDE */}
-            <motion.div
-              initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="space-y-6"
-            >
+            <div ref={leftRef} className="space-y-6" style={{ opacity: 0 }}>
               <p className="text-neutral-500 tracking-[0.25em] uppercase text-xs sm:text-sm">
                 MERN Stack Developer
               </p>
 
               <div className="leading-[1.05] space-y-2">
-                {["Crafting", "Modern", "Web Apps"].map((word, index) => (
-                  <motion.h1
+                {words.map((word, index) => (
+                  <h1
                     key={index}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      delay: 0.3 + index * 0.2,
-                      duration: 0.8,
-                      ease: "easeOut",
-                    }}
-                    className={`font-bold text-neutral-100 ${
-                      word === "Modern" ? "italic" : ""
-                    }`}
-                    style={{ fontSize: "clamp(2.4rem, 5vw, 5rem)" }}
+                    ref={el => (wordsRef.current[index] = el)}
+                    className={`font-bold text-neutral-100 ${word === "Modern" ? "italic" : ""}`}
+                    style={{ fontSize: "clamp(2.4rem, 5vw, 5rem)", opacity: 0 }}
                   >
                     {word}
-                  </motion.h1>
+                  </h1>
                 ))}
               </div>
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1, duration: 1 }}
+              <p
                 className="text-neutral-400 max-w-xl leading-relaxed"
                 style={{ fontSize: "clamp(0.95rem, 1.2vw, 1.25rem)" }}
               >
                 Building full-stack applications with MongoDB, Express,
                 React, and Node.js. Transforming ideas into scalable,
                 high-performance web solutions.
-              </motion.p>
+              </p>
 
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2, duration: 0.8 }}
-                className="flex flex-wrap gap-4 pt-2"
-              >
+              <div className="flex flex-wrap gap-4 pt-2">
                 <button className="px-8 py-3 bg-neutral-100 text-black font-semibold rounded hover:scale-105 transition-all duration-300">
                   VIEW PROJECTS
                 </button>
-
                 <button className="px-8 py-3 border border-neutral-700 text-neutral-200 rounded hover:bg-neutral-800/50 transition-all duration-300">
                   GET IN TOUCH
                 </button>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* RIGHT SIDE */}
-            <motion.div
-              initial={{ opacity: 0, x: 80 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6, duration: 1 }}
+            <div
+              ref={rightRef}
               className="flex justify-center lg:justify-end"
+              style={{ opacity: 0 }}
             >
               <div className="text-center lg:text-right space-y-5">
                 <h2
@@ -114,7 +127,7 @@ export default function HomePage() {
 
                 <div className="w-20 h-[2px] bg-gradient-to-r from-violet-500 to-pink-400 mx-auto lg:ml-auto"></div>
               </div>
-            </motion.div>
+            </div>
 
           </div>
         </div>

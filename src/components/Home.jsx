@@ -29,52 +29,67 @@ export default function HomePage() {
       <div className="relative z-10 w-full px-6 md:px-14 xl:px-24 2xl:px-32">
         <div className="grid lg:grid-cols-2 gap-16 items-center w-full">
 
-          {/* LEFT SIDE */}
-          <div className="space-y-8 lg:mt-16">
-            <p className="text-neutral-500 tracking-[0.3em] uppercase text-sm">
-              MERN Stack Developer
-            </p>
+{/* LEFT SIDE */}
+<div className="space-y-6 sm:space-y-8 lg:space-y-10 lg:mt-16">
 
-            <div className="leading-tight">
-              <h1
-                className="font-bold text-neutral-100"
-                style={{ fontSize: "clamp(2.8rem, 6vw, 6rem)" }}
-              >
-                Crafting
-              </h1>
-              <h1
-                className="font-bold italic text-neutral-100"
-                style={{ fontSize: "clamp(2.8rem, 6vw, 6rem)" }}
-              >
-                Modern
-              </h1>
-              <h1
-                className="font-bold text-neutral-100"
-                style={{ fontSize: "clamp(2.8rem, 6vw, 6rem)" }}
-              >
-                Web Apps
-              </h1>
-            </div>
+  {/* Small Tag */}
+  <p className="text-neutral-500 tracking-[0.3em] uppercase 
+                text-xs sm:text-sm">
+    MERN Stack Developer
+  </p>
 
-            <p
-              className="text-neutral-400 max-w-2xl leading-relaxed"
-              style={{ fontSize: "clamp(1rem, 1.3vw, 1.4rem)" }}
-            >
-              Building full-stack applications with MongoDB, Express, React,
-              and Node.js. Transforming ideas into scalable, high-performance
-              web solutions.
-            </p>
+  {/* Heading */}
+  <div className="leading-[1.02] sm:leading-[1.05]">
+    <h1 className="font-bold text-neutral-100 
+                   text-4xl sm:text-5xl md:text-6xl 
+                   lg:text-7xl xl:text-8xl 2xl:text-[9rem]">
+      Crafting
+    </h1>
 
-            <div className="flex flex-wrap gap-6 pt-4">
-              <button className="px-10 py-4 bg-neutral-100 text-black font-semibold rounded hover:scale-105 transition-all duration-300">
-                VIEW PROJECTS
-              </button>
+    <h1 className="font-bold italic text-neutral-100 
+                   text-4xl sm:text-5xl md:text-6xl 
+                   lg:text-7xl xl:text-8xl 2xl:text-[9rem]">
+      Modern
+    </h1>
 
-              <button className="px-10 py-4 border border-neutral-700 text-neutral-200 rounded hover:bg-neutral-800/50 transition-all duration-300">
-                GET IN TOUCH
-              </button>
-            </div>
-          </div>
+    <h1 className="font-bold text-neutral-100 
+                   text-4xl sm:text-5xl md:text-6xl 
+                   lg:text-7xl xl:text-8xl 2xl:text-[9rem]">
+      Web Apps
+    </h1>
+  </div>
+
+  {/* Description */}
+  <p className="text-neutral-400 
+                max-w-lg md:max-w-xl 
+                text-base sm:text-lg md:text-xl 
+                leading-relaxed">
+    Building full-stack applications with MongoDB, Express, React,
+    and Node.js. Transforming ideas into scalable, high-performance
+    web solutions.
+  </p>
+
+  {/* Buttons */}
+  <div className="flex flex-wrap gap-4 pt-4">
+    <button className="px-8 sm:px-10 py-3 sm:py-4 
+                       text-base sm:text-lg
+                       bg-neutral-100 text-black font-semibold 
+                       rounded hover:scale-105 
+                       transition-all duration-300">
+      VIEW PROJECTS
+    </button>
+
+    <button className="px-8 sm:px-10 py-3 sm:py-4 
+                       text-base sm:text-lg
+                       border border-neutral-700 
+                       text-neutral-200 rounded 
+                       hover:bg-neutral-800/50 
+                       transition-all duration-300">
+      GET IN TOUCH
+    </button>
+  </div>
+
+</div>
 
           {/* RIGHT SIDE */}
           <div className="flex justify-center lg:justify-end mt-12 lg:mt-0">

@@ -25,17 +25,9 @@ export default function Footer() {
 
   return (
     <footer className="bg-gradient-to-br from-black via-[#0a0a0a] to-[#111] relative overflow-hidden border-t border-neutral-800/50">
-      {/* Global gradient orbs - Black & White */}
-      <div className="fixed top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-white/5 via-neutral-400/3 to-transparent rounded-full blur-3xl"></div>
-      <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-neutral-300/5 via-white/3 to-transparent rounded-full blur-3xl"></div>
-      
-      {/* Global background pattern */}
-      <div className="fixed inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.03) 1px, transparent 0)',
-          backgroundSize: '40px 40px'
-        }}></div>
-      </div>
+      {/* Background orbs - absolute scoped to footer only */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-white/5 via-neutral-400/3 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-neutral-300/5 via-white/3 to-transparent rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-[1600px] mx-auto px-5 md:px-12 lg:px-24 xl:px-24 relative z-10">
         {/* Main Footer Content */}

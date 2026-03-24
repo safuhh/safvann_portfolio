@@ -95,10 +95,24 @@ export default function HomePage() {
               </p>
 
               <div className="flex flex-wrap gap-4 pt-2">
-                <button className="px-8 py-3 bg-neutral-100 text-black font-semibold rounded hover:scale-105 transition-all duration-300">
+                <button
+                  onClick={() => {
+                    const target = document.querySelector('#projects');
+                    if (window.lenis) window.lenis.scrollTo(target, { offset: -80, duration: 1.2 });
+                    else target?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="px-8 py-3 bg-neutral-100 text-black font-semibold rounded hover:scale-105 transition-all duration-300"
+                >
                   VIEW PROJECTS
                 </button>
-                <button className="px-8 py-3 border border-neutral-700 text-neutral-200 rounded hover:bg-neutral-800/50 transition-all duration-300">
+                <button
+                  onClick={() => {
+                    const target = document.querySelector('#contact');
+                    if (window.lenis) window.lenis.scrollTo(target, { offset: -80, duration: 1.2 });
+                    else target?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="px-8 py-3 border border-neutral-700 text-neutral-200 rounded hover:bg-neutral-800/50 transition-all duration-300"
+                >
                   GET IN TOUCH
                 </button>
               </div>

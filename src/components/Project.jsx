@@ -23,8 +23,8 @@ export default function ProjectsSection() {
       title: 'E-Commerce Platform',
       year: '2025',
       category: 'Full Stack',
-      image: '/E-com.png',
-      url: 'https://prowellstore.vercel.app/'
+      image: '/prowellHome.png',
+      url: 'https://prowellfitness.vercel.app/'
     },
     {
       id: 3,

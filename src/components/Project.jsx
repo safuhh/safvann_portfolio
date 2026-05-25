@@ -3,53 +3,58 @@ import React, { useState, useEffect } from 'react';
 export default function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState('All Projects');
 
-  const projects = [
-    {
-      id: 1,
-      title: 'Developer Portfolio',
-      year: '2025',
-      category: 'Frontend',
-      image: "/portfolio.jpg",
-      url: null,
-      description: "A visually stunning and highly interactive personal portfolio website. Built with modern web technologies to showcase projects, skills, and professional experience with smooth animations and dynamic layouts."
-    },
-    {
-      id: 2,
-      title: 'E-Commerce Platform',
-      year: '2025',
-      category: 'Full Stack',
-      image: '/prowellHome.jpg',
-      url: 'https://prowellfitness.vercel.app/',
-      description: "A comprehensive e-commerce solution featuring secure payment gateways, intuitive product browsing, cart management, and seamless checkout experiences for optimal user engagement."
-    },
-    {
-      id: 3,
-      title: 'Strevia Streaming',
-      year: '2026',
-      category: 'Full Stack',
-      image: '/Strevia.jpg',
-      url: 'https://strevia-streaming.vercel.app/',
-      description: "A next-generation streaming platform offering high-quality video content delivery. Features include personalized recommendations, user watchlists, and seamless playback across devices."
-    },
-    {
-      id: 4,
-      title: 'Fework',
-      year: '2026',
-      category: 'Full Stack',
-      image: '/fework.jpg',
-      url: 'https://fework.vercel.app/',
-      description: "A next-generation streaming platform offering high-quality video content delivery. Features include personalized recommendations, user watchlists, and seamless playback across devices."
-    },
-    {
-      id: 5,
-      title: 'TheLostCabins Resorts',
-      year: '2026',
-      category: 'Full Stack',
-      image: '/LostCabins.png',
-      url: 'https://thelostcabins.vercel.app/',
-      description: "A next-generation streaming platform offering high-quality video content delivery. Features include personalized recommendations, user watchlists, and seamless playback across devices."
-    },
-  ];
+const projects = [
+  {
+    id: 1,
+    title: 'Developer Portfolio',
+    year: '2025',
+    type: 'Portfolio Website',
+    image: "/portfolio.png",
+    url: null,
+    description:
+      "A visually engaging and interactive developer portfolio built to showcase projects, technical skills, and professional experience with smooth animations and modern UI design."
+  },
+  {
+    id: 2,
+    title: 'Prowell Fitness',
+    year: '2025',
+    type: 'Fitness supplyment E-Commerce Platform',
+    image: '/E-com.png',
+    url: 'https://prowellfitness.vercel.app/',
+    description:
+      "A full-featured e-commerce platform with secure authentication, product management, shopping cart functionality, and a streamlined checkout experience."
+  },
+  {
+    id: 3,
+    title: 'Strevia Streaming',
+    year: '2026',
+    type: 'Streaming Platform',
+    image: '/Strevia.png',
+    url: 'https://strevia-streaming.vercel.app/',
+    description:
+      "A modern streaming platform focused on seamless media playback, personalized recommendations, user watchlists, and responsive cross-device viewing experiences."
+  },
+  {
+    id: 4,
+    title: 'Fework',
+    year: '2026',
+    type: 'Hyperlocal Service Marketplace',
+    image: '/fework.jpg',
+    url: 'https://fework.vercel.app/',
+    description:
+      "A hyperlocal service marketplace designed to connect clients and professionals through project listings, streamlined communication, and efficient workflow management."
+  },
+  {
+    id: 5,
+    title: 'The Lost Cabins',
+    year: '2026',
+    type: 'TheLostCabins Official Website',
+    image: '/LostCabins.png',
+    url: 'https://thelostcabins.vercel.app/',
+    description:
+      "A premium resort and hospitality website crafted for TheLostCabins Resort to deliver an immersive booking experience with elegant visuals, smooth interactions, and nature-inspired design aesthetics."
+  },
+];
 
   const filters = ['All Projects', ...new Set(projects.map((p) => p.category))];
 
@@ -138,7 +143,7 @@ export default function ProjectsSection() {
                         src={project.image}
                         alt={project.title}
                         loading="lazy"
-                        className="w-full h-full object-cover rounded-2xl shadow-2xl group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-700 ease-out"
+                        className="max-w-full max-h-full rounded-xl shadow-2xl group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-700 ease-out"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-8xl text-neutral-600">
@@ -152,7 +157,7 @@ export default function ProjectsSection() {
                 <div className="w-full lg:w-2/5 flex flex-col justify-center">
                   {/* Category Pill */}
                   <div className="inline-block px-5 py-2 rounded-full bg-gradient-to-r from-teal-500/20 to-purple-500/20 border border-teal-400/30 text-white text-sm font-semibold tracking-wide mb-6 w-fit">
-                    {project.category}
+                    {project.type}
                   </div>
                   
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-100 mb-6 leading-tight">

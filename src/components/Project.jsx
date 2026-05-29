@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 export default function ProjectsSection() {
-  const [activeFilter, setActiveFilter] = useState('All Projects');
 
 const projects = [
   {
@@ -56,33 +55,6 @@ const projects = [
   },
 ];
 
-  const filters = ['All Projects', ...new Set(projects.map((p) => p.category))];
-
-  const filteredProjects =
-    activeFilter === 'All Projects'
-      ? projects
-      : projects.filter((project) => project.category === activeFilter);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-          } else {
-            entry.target.classList.remove('active');
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-
-    const elements = document.querySelectorAll('.reveal');
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, [activeFilter, filteredProjects]); // Re-observe when items change
-
   return (
     <section id="projects" className="min-h-screen relative">
       <div className="max-w-[1600px] mx-auto px-5 md:px-12 lg:px-24 py-20 relative z-10">
@@ -105,24 +77,16 @@ const projects = [
 
         {/* Filters */}
         <div className="flex flex-wrap justify-center gap-3 mb-16 reveal">
-          {filters.map((filter) => (
             <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                activeFilter === filter
-                  ? 'bg-neutral-100 text-black'
-                  : 'border border-neutral-700 text-neutral-400 hover:text-neutral-200'
-              }`}
+              className={'px-6 py-3 rounded-full font-medium transition-all duration-300 bg-neutral-100 text-black border border-neutral-700'}
             >
-              {filter}
+              All Projects
             </button>
-          ))}
         </div>
 
         {/* Projects Grid */}
         <div className="flex flex-col gap-16 md:gap-24 pb-24">
-          {filteredProjects.map((project, index) => (
+          {projects.map((project, index) => (
             <div
               key={project.id}
               className="sticky"

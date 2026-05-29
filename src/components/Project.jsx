@@ -39,7 +39,7 @@ const projects = [
     title: 'Fework',
     year: '2026',
     type: 'Hyperlocal Service Marketplace',
-    image: '/fework.jpg',
+    image: '/fework-ss.png',
     url: 'https://fework.vercel.app/',
     description:
       "A hyperlocal service marketplace designed to connect clients and professionals through project listings, streamlined communication, and efficient workflow management."

@@ -49,7 +49,7 @@ const projects = [
     year: '2026',
     type: 'TheLostCabins Official Website',
     image: '/LostCabins.png',
-    url: 'https://thelostcabins.vercel.app/',
+    url: 'https://thelostcabins.in/',
     description:
       "A premium resort and hospitality website crafted for TheLostCabins Resort to deliver an immersive booking experience with elegant visuals, smooth interactions, and nature-inspired design aesthetics."
   },

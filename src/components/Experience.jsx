@@ -15,7 +15,7 @@ export default function ExperienceSection({ theme = 'dark', setTheme = () => {} 
         'Actively contributing to tasks involving code optimization, bug fixing, and deployment practices',
         'Enhancing skills in teamwork, version control (Git), and industry-standard workflows'
       ],
-      technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap',"Tailwind", "Redux", 'React', 'Node.js', 'MongoDB', 'Express', 'Git', 'Responsive Design']
+      technologies: ['HTML', 'CSS', 'JavaScript','TypeScript', 'Bootstrap',"Tailwind", "Redux", 'React.js','Next.js', 'Node.js', 'MongoDB', 'Express.js', 'Git','AWS','GitHub', 'Postman', 'Responsive Design']
     }
   ];
 

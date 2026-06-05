@@ -147,8 +147,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full h-48 pointer-events-none backdrop-blur-sm" style={{ maskImage: 'linear-gradient(to bottom, transparent, black)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black)' }}></div>
-      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-black pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-full h-28 bg-gradient-to-b from-transparent to-black pointer-events-none"></div>
     </section>
   );
 }

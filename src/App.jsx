@@ -29,7 +29,7 @@ function App() {
         />
         <Navbar />
         <HomePage />
-        <div className="relative z-10 bg-inherit w-full">
+        <div className={`relative z-10 w-full ${theme === 'light' ? 'bg-white' : 'bg-black'} transition-colors duration-1000`}>
           <AboutSection />
           <ExperienceSection theme={theme} setTheme={setTheme} />
           <ProjectsSection />

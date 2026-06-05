@@ -96,7 +96,7 @@ const projects = [
               }}
             >
               <div
-                className={`group reveal flex flex-col ${index % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-16 items-center bg-neutral-900 border border-neutral-800 rounded-[2.5rem] p-6 sm:p-8 lg:p-12  transition-all duration-500 shadow-2xl`}
+                className={`group flex flex-col ${index % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-16 items-center bg-neutral-900 border border-neutral-800 rounded-[2.5rem] p-6 sm:p-8 lg:p-12  transition-all duration-500 shadow-2xl`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 {/* Image Container */}

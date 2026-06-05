@@ -2,13 +2,13 @@
 import { useEffect, useRef, useState } from 'react';
 
 function SplashCursor({
-  SIM_RESOLUTION = 128,
-  DYE_RESOLUTION = 1440,
-  CAPTURE_RESOLUTION = 512,
+  SIM_RESOLUTION = 64,
+  DYE_RESOLUTION = 512,
+  CAPTURE_RESOLUTION = 256,
   DENSITY_DISSIPATION = 3.5,
   VELOCITY_DISSIPATION = 2,
   PRESSURE = 0.1,
-  PRESSURE_ITERATIONS = 20,
+  PRESSURE_ITERATIONS = 10,
   CURL = 3,
   SPLAT_RADIUS = 0.2,
   SPLAT_FORCE = 6000,
@@ -21,16 +21,15 @@ function SplashCursor({
 }) {
   const canvasRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+  const isVisibleRef = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > window.innerHeight * 0.7) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      const visible = window.scrollY > window.innerHeight * 0.7;
+      isVisibleRef.current = visible;
+      setIsVisible(visible);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -690,13 +689,14 @@ function SplashCursor({
     let colorUpdateTimer = 0.0;
 
     function updateFrame() {
-      const dt = calcDeltaTime();
+      const dt = calcDeltaTime(); // Always tick the clock
+      requestAnimationFrame(updateFrame);
+      if (!isVisibleRef.current) return; // Skip GPU work when hidden
       if (resizeCanvas()) initFramebuffers();
       updateColors(dt);
       applyInputs();
       step(dt);
       render(null);
-      requestAnimationFrame(updateFrame);
     }
 
     function calcDeltaTime() {
@@ -1081,7 +1081,7 @@ function SplashCursor({
   return (
     <div 
       className="fixed top-0 left-0 z-50 pointer-events-none w-full h-full transition-opacity duration-1000 ease-in-out"
-      style={{ opacity: isVisible ? 1 : 0 }}
+      style={{ opacity: isVisible ? 0.45 : 0 }}
     >
       <canvas ref={canvasRef} id="fluid" className="w-screen h-screen block"></canvas>
     </div>

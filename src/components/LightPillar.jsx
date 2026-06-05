@@ -14,7 +14,8 @@ const LightPillar = ({
   noiseIntensity = 0.5,
   mixBlendMode = 'screen',
   pillarRotation = 0,
-  quality = 'high'
+  quality = 'high',
+  isHomeVisible = true
 }) => {
   const containerRef = useRef(null);
   const rafRef = useRef(null);
@@ -27,7 +28,10 @@ const LightPillar = ({
   const timeRef = useRef(0);
   const rotationSpeedRef = useRef(rotationSpeed); // Avoid stale closure
   const isVisibleRef = useRef(true); // Pause render when off-screen
+  const isHomeVisibleRef = useRef(isHomeVisible);
   const [webGLSupported, setWebGLSupported] = useState(true);
+
+  useEffect(() => { isHomeVisibleRef.current = isHomeVisible; }, [isHomeVisible]);
 
   // Check WebGL support + pause shader when scrolled away
   useEffect(() => {
@@ -253,7 +257,7 @@ const LightPillar = ({
     }
 
     let lastTime = performance.now();
-    const targetFPS = effectiveQuality === 'low' ? 30 : 60;
+    const targetFPS = effectiveQuality === 'high' ? 60 : effectiveQuality === 'medium' ? 30 : 20;
     const frameTime = 1000 / targetFPS;
 
     const animate = currentTime => {
@@ -262,7 +266,7 @@ const LightPillar = ({
       const deltaTime = currentTime - lastTime;
 
       if (deltaTime >= frameTime) {
-        if (isVisibleRef.current) { // Only render when visible
+        if (isVisibleRef.current && isHomeVisibleRef.current) { // Only render when visible
           timeRef.current += 0.016 * rotationSpeedRef.current;
           const t = timeRef.current;
           materialRef.current.uniforms.uTime.value = t;

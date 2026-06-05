@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import LightPillar from "./LightPillar";
 
@@ -6,6 +6,8 @@ export default function HomePage() {
   const leftRef = useRef(null);
   const rightRef = useRef(null);
   const wordsRef = useRef([]);
+  const homeRef = useRef(null);
+  const [isHomeVisible, setIsHomeVisible] = useState(true);
 
   useEffect(() => {
     // Initial entrance animations with GSAP (runs once, no scroll overhead)
@@ -37,11 +39,25 @@ export default function HomePage() {
     return () => tl.kill();
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHomeVisible(entry.isIntersecting);
+      },
+      { threshold: 0 }
+    );
+    if (homeRef.current) {
+      observer.observe(homeRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
   const words = ["Crafting", "Modern", "Web Apps"];
 
   return (
     <section
       id="home"
+      ref={homeRef}
       className="relative min-h-screen pt-20 w-full overflow-hidden bg-transparent z-0"
     >
       {/* Background */}
@@ -58,7 +74,8 @@ export default function HomePage() {
           pillarRotation={25}
           interactive={false}
           mixBlendMode="screen"
-          quality="high"
+          quality="medium"
+          isHomeVisible={isHomeVisible}
         />
       </div>
 

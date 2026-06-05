@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import LenisSmoothScroll from "./components/LenisScroll";
 import Navbar from "./components/Navbar";
 import HomePage from "./components/Home";
@@ -9,8 +10,10 @@ import Footer from "./components/Footer";
 import SplashCursor from "./components/SplashCursor";
 
 function App() {
+  const [theme, setTheme] = useState('dark');
+
   return (
-    <div className="bg-black text-white">
+    <div className={`transition-colors duration-1000 ease-in-out ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'}`}>
       <LenisSmoothScroll>
         <SplashCursor
           DENSITY_DISSIPATION={3.5}
@@ -26,11 +29,13 @@ function App() {
         />
         <Navbar />
         <HomePage />
-        <AboutSection />
-        <ExperienceSection />
-        <ProjectsSection />
-        <ContactSection />
-        <Footer />
+        <div className="relative z-10 bg-inherit w-full">
+          <AboutSection />
+          <ExperienceSection theme={theme} setTheme={setTheme} />
+          <ProjectsSection />
+          <ContactSection />
+          <Footer />
+        </div>
       </LenisSmoothScroll>
     </div>
   );

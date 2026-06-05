@@ -42,10 +42,10 @@ export default function HomePage() {
   return (
     <section
       id="home"
-      className="relative min-h-screen pt-20 w-full overflow-hidden bg-black"
+      className="relative min-h-screen pt-20 w-full overflow-hidden bg-transparent z-0"
     >
       {/* Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
         <LightPillar
           topColor="#5227FF"
           bottomColor="#FF9FFC"
@@ -147,7 +147,8 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full h-28 bg-gradient-to-b from-transparent to-black pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-full h-48 pointer-events-none backdrop-blur-sm" style={{ maskImage: 'linear-gradient(to bottom, transparent, black)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black)' }}></div>
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-black pointer-events-none"></div>
     </section>
   );
 }

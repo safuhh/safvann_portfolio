@@ -2,19 +2,24 @@ import React, { useEffect } from 'react';
 
 export default function ExperienceSection({ theme = 'dark', setTheme = () => {} }) {
   const experiences = [
-    {
-      id: 1,
-      period: 'JULY 2025 - PRESENT',
-      title: 'MERN Stack Developer Intern',
-      company: 'Bridgeon Solutions',
-      type: 'on-site',
-      description: 'Currently working as a Web Development Intern, gaining practical experience in front-end and back-end technologies. Building responsive user interfaces and collaborating with the development team to support real-world projects and client requirements.',
-      responsibilities: [
-        'Building responsive user interfaces using HTML, CSS, Bootstrap, and JavaScript',
-        'Collaborating with the development team to support real-world projects and client requirements',
-        'Actively contributing to tasks involving code optimization, bug fixing, and deployment practices',
-        'Enhancing skills in teamwork, version control (Git), and industry-standard workflows'
-      ],
+{
+id: 1,
+period: 'JULY 2025 - PRESENT',
+title: 'MERN Stack Developer',
+company: 'Bridgeon Solutions',
+type: 'On-site',
+description:
+'Working as a MERN Stack Developer with experience in designing, developing, and maintaining full-stack web applications. Skilled in building scalable solutions using MongoDB, Express.js, React.js, Node.js, and Next.js while collaborating with cross-functional teams to deliver high-quality products.',
+responsibilities: [
+'Developing and maintaining full-stack web applications using the MERN stack',
+'Building responsive and modern user interfaces with React.js, Next.js, Tailwind CSS, and Bootstrap',
+'Designing and integrating RESTful APIs using Node.js and Express.js',
+'Managing databases and data models using MongoDB',
+'Optimizing application performance, security, and user experience',
+'Collaborating with designers, developers, and stakeholders to deliver business requirements',
+'Using Git and GitHub for version control and team collaboration',
+'Deploying and maintaining applications on cloud platforms and production environments'
+],
       technologies: ['HTML', 'CSS', 'JavaScript','TypeScript', 'Bootstrap',"Tailwind", "Redux", 'React.js','Next.js', 'Node.js', 'MongoDB', 'Express.js', 'Git','AWS','GitHub', 'Postman', 'Responsive Design']
     }
   ];

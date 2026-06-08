@@ -148,7 +148,7 @@ const DotField = memo(({
         const dy = m.y - d.ay;
         const distSq = dx * dx + dy * dy;
 
-        if (distSq < crSq && eng > 0.01) {
+        if (false) {
           const dist = Math.sqrt(distSq);
           if (isBulge) {
             const t = 1 - dist / cr;

@@ -31,34 +31,47 @@ export default function Navbar() {
 
   // 🔥 ScrollSpy
   useEffect(() => {
-    const sections = navItems.map((item) =>
-      document.querySelector(item.target)
-    );
-
     let rafId;
     const onScroll = () => {
       if (rafId) return;
 
       rafId = requestAnimationFrame(() => {
         const scrollPos = window.scrollY + window.innerHeight / 3; // Trigger when section hits top 1/3rd of screen
-        sections.forEach((section, index) => {
-          if (!section) return;
+        let currentActive = 0; // Default to Home
+        
+        for (let i = 0; i < navItems.length; i++) {
+          const section = document.querySelector(navItems[i].target);
+          if (!section) continue;
+          
           const rect = section.getBoundingClientRect();
           const top = rect.top + window.scrollY;
           const height = section.offsetHeight;
+          
           if (scrollPos >= top && scrollPos < top + height) {
-            setActiveIndex(index);
+            currentActive = i;
+            // Break early so the highest visible section wins if there's any layout overlap
+            break; 
           }
-        });
+        }
+        
+        setActiveIndex((prev) => (prev !== currentActive ? currentActive : prev));
         rafId = null;
       });
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
+    
+    // Check immediately, and also after layout stabilizes (handles lazy load & scroll restoration)
     onScroll();
+    const timeoutId1 = setTimeout(onScroll, 100);
+    const timeoutId2 = setTimeout(onScroll, 500);
+    const timeoutId3 = setTimeout(onScroll, 1000);
 
     return () => {
       window.removeEventListener("scroll", onScroll);
+      clearTimeout(timeoutId1);
+      clearTimeout(timeoutId2);
+      clearTimeout(timeoutId3);
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);

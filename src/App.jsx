@@ -24,6 +24,17 @@ const Loader = () => (
 
 function App() {
   const [theme, setTheme] = useState('dark');
+  const [isInitializing, setIsInitializing] = useState(true);
+
+  React.useEffect(() => {
+    // Show the premium loader as an intro sequence for 2 seconds
+    const timer = setTimeout(() => setIsInitializing(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isInitializing) {
+    return <Loader />;
+  }
 
   return (
     <div className={`transition-colors duration-1000 ease-in-out ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'}`}>

@@ -16,6 +16,10 @@ export default function LenisScroll({ children }) {
 
     window.lenis = lenis; // Expose for Navbar
     document.documentElement.style.scrollBehavior = 'auto'; // Prevent native smooth scroll fighting Lenis
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
 
     let rafId;
     function raf(time) {

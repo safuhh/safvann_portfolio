@@ -40,10 +40,11 @@ export default function Navbar() {
       if (rafId) return;
 
       rafId = requestAnimationFrame(() => {
-        const scrollPos = window.scrollY + 120;
+        const scrollPos = window.scrollY + window.innerHeight / 3; // Trigger when section hits top 1/3rd of screen
         sections.forEach((section, index) => {
           if (!section) return;
-          const top = section.offsetTop;
+          const rect = section.getBoundingClientRect();
+          const top = rect.top + window.scrollY;
           const height = section.offsetHeight;
           if (scrollPos >= top && scrollPos < top + height) {
             setActiveIndex(index);

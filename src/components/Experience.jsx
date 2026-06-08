@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import DotField from './DotField';
 
 export default function ExperienceSection({ theme = 'dark', setTheme = () => {} }) {
   const experiences = [
@@ -65,6 +66,22 @@ responsibilities: [
 
   return (
     <section id="experience" className="min-h-screen relative overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <DotField
+          dotRadius={1.5}
+          dotSpacing={14}
+          bulgeStrength={67}
+          glowRadius={160}
+          sparkle={false}
+          waveAmplitude={0}
+          cursorRadius={500}
+          cursorForce={0.1}
+          bulgeOnly
+          gradientFrom="#A855F7"
+          gradientTo="#B497CF"
+          glowColor="#120F17"
+        />
+      </div>
       <div className="max-w-[1600px] mx-auto px-5 md:px-12 lg:px-24 xl:px-24 py-20 relative z-10">
         
         {/* Header */}
@@ -100,8 +117,24 @@ responsibilities: [
               <div className={`absolute left-0 md:left-8 -translate-x-1/2 w-3 h-3 md:w-4 md:h-4 ${theme === 'light' ? 'bg-black border-white shadow-black/20' : 'bg-neutral-100 border-black shadow-neutral-500/50'} rounded-full border-4 shadow-lg transition-colors duration-700`}></div>
 
               {/* Content Card */}
-              <div className={`ml-6 md:ml-20 ${theme === 'light' ? 'bg-white border-neutral-300 hover:border-black hover:bg-neutral-50' : 'bg-neutral-900/90 border-neutral-700/50 hover:border-neutral-500 hover:bg-neutral-800'} border rounded-lg p-5 md:p-8 transition-all duration-500`}>
-                <div className="grid md:grid-cols-3 gap-8">
+              <div className={`relative overflow-hidden ml-6 md:ml-20 ${theme === 'light' ? 'bg-white border-neutral-300 hover:border-black hover:bg-neutral-50' : 'bg-neutral-900/90 border-neutral-700/50 hover:border-neutral-500 hover:bg-neutral-800'} border rounded-lg p-5 md:p-8 transition-all duration-500`}>
+                <div className="absolute inset-0 z-0">
+                  <DotField
+                    dotRadius={1.5}
+                    dotSpacing={14}
+                    bulgeStrength={67}
+                    glowRadius={160}
+                    sparkle={false}
+                    waveAmplitude={0}
+                    cursorRadius={500}
+                    cursorForce={0.1}
+                    bulgeOnly
+                    gradientFrom="#A855F7"
+                    gradientTo="#B497CF"
+                    glowColor="#120F17"
+                  />
+                </div>
+                <div className="relative z-10 grid md:grid-cols-3 gap-8">
                   {/* Left Column - Main Info */}
                   <div className="md:col-span-2">
                     <p className="text-neutral-500 tracking-[0.3em] text-xs uppercase mb-3 font-semibold">

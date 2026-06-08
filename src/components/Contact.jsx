@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, MapPin, Phone, Send, Github, Linkedin, Twitter, Instagram } from 'lucide-react';
+import Orb from './Orb';
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -118,6 +119,15 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="min-h-screen relative overflow-hidden py-20">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <Orb
+          hoverIntensity={2}
+          rotateOnHover
+          hue={0}
+          forceHoverState={false}
+          backgroundColor="#000000"
+        />
+      </div>
       <div className="max-w-[1600px] mx-auto px-5 md:px-12 lg:px-20 xl:px-20 relative z-10">
 
         {/* HEADER */}
@@ -150,8 +160,8 @@ export default function ContactSection() {
                   <a
                     key={index}
                     href={item.href}
-                    className="flex items-start space-x-4 p-5 bg-neutral-800 border border-neutral-700/50 hover:bg-neutral-800/80 
-                      rounded-xl border border-neutral-700/50 hover:border-white hover:scale-105 transition-all duration-300 group reveal reveal-left"
+                    className="flex items-start space-x-4 p-5 bg-neutral-800/40 backdrop-blur-md border border-neutral-700/50 hover:bg-neutral-800/60 
+                      rounded-xl hover:border-white hover:scale-105 transition-all duration-300 group reveal reveal-left"
                     style={{ transitionDelay: `${index * 100}ms` }}
                   >
                     <div className="w-12 h-12 rounded-lg bg-neutral-700/50 flex items-center justify-center group-hover:bg-neutral-600/50 transition-colors">
@@ -185,7 +195,7 @@ export default function ContactSection() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Follow on ${social.label}`}
-                      className="w-12 h-12 rounded-full bg-neutral-800 
+                      className="w-12 h-12 rounded-full bg-neutral-800/40 backdrop-blur-md 
                         flex items-center justify-center border border-neutral-700/50 
                         text-neutral-400 hover:text-neutral-100 hover:border-neutral-500 
                         hover:scale-110 transition-all duration-300 reveal"
@@ -201,7 +211,7 @@ export default function ContactSection() {
 
           {/* RIGHT SIDE — FORM */}
           <div className="reveal reveal-right">
-            <div className="bg-neutral-800 border border-neutral-700/50 rounded-2xl p-8 space-y-6">
+            <div className="bg-neutral-800/40 backdrop-blur-xl border border-neutral-700/50 rounded-2xl p-8 space-y-6">
 
               {/* Status Message */}
               {submitStatus.message && (

@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 
-export default function AboutSection() {
+const AboutSection = memo(function AboutSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -138,4 +138,6 @@ export default function AboutSection() {
       </div>
     </section>
   );
-}
+});
+
+export default AboutSection;

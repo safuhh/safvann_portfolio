@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { memo } from 'react';
 
-export default function ProjectsSection() {
+const ProjectsSection = memo(function ProjectsSection() {
 
 const projects = [
   {
@@ -161,4 +161,6 @@ const projects = [
       </div>
     </section>
   );
-}
+});
+
+export default ProjectsSection;

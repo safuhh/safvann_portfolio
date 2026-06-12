@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, memo } from "react";
 
-export default function Navbar() {
+const navItems = [
+  { name: "Home", target: "#home" },
+  { name: "About", target: "#about" },
+  { name: "Experience", target: "#experience" },
+  { name: "Projects", target: "#projects" },
+  { name: "Contact", target: "#contact" },
+];
+
+const Navbar = memo(function Navbar() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const navItems = [
-    { name: "Home", target: "#home" },
-    { name: "About", target: "#about" },
-    { name: "Experience", target: "#experience" },
-    { name: "Projects", target: "#projects" },
-    { name: "Contact", target: "#contact" },
-  ];
+  // Use ref to cache the DOM elements to prevent querySelector on every scroll
+  const sectionsRef = useRef([]);
 
   // 🔥 Scroll to section (Lenis aware)
   const handleScroll = (index, target) => {
@@ -32,6 +35,14 @@ export default function Navbar() {
   // 🔥 ScrollSpy
   useEffect(() => {
     let rafId;
+
+    const getSection = (index, target) => {
+      if (!sectionsRef.current[index]) {
+        sectionsRef.current[index] = document.querySelector(target);
+      }
+      return sectionsRef.current[index];
+    };
+
     const onScroll = () => {
       if (rafId) return;
 
@@ -40,7 +51,7 @@ export default function Navbar() {
         let currentActive = 0; // Default to Home
         
         for (let i = 0; i < navItems.length; i++) {
-          const section = document.querySelector(navItems[i].target);
+          const section = getSection(i, navItems[i].target);
           if (!section) continue;
           
           const rect = section.getBoundingClientRect();
@@ -145,4 +156,6 @@ export default function Navbar() {
       )}
     </nav>
   );
-}
+});
+
+export default Navbar;

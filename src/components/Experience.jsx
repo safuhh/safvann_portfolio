@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import DotField from './DotField';
 
-export default function ExperienceSection({ theme = 'dark', setTheme = () => {} }) {
+const ExperienceSection = memo(function ExperienceSection({ theme = 'dark', setTheme = () => {} }) {
   const experiences = [
 {
 id: 1,
@@ -210,4 +210,6 @@ responsibilities: [
       </div>
     </section>
   );
-}
+});
+
+export default ExperienceSection;

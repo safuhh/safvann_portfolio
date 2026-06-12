@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Github, Linkedin, Mail, Twitter, Instagram, ArrowUp, Heart } from 'lucide-react';
 
-export default function Footer() {
+const Footer = memo(function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -130,4 +130,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+});
+
+export default Footer;

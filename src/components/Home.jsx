@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, memo } from "react";
 import { gsap } from "gsap";
 import LightPillar from "./LightPillar";
 
-export default function HomePage() {
+const HomePage = memo(function HomePage() {
   const leftRef = useRef(null);
   const rightRef = useRef(null);
   const wordsRef = useRef([]);
@@ -167,4 +167,6 @@ export default function HomePage() {
       <div className="absolute bottom-0 left-0 w-full h-28 bg-gradient-to-b from-transparent to-black pointer-events-none"></div>
     </section>
   );
-}
+});
+
+export default HomePage;

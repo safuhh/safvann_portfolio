@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Mail, MapPin, Phone, Send, Github, Linkedin, Twitter, Instagram } from 'lucide-react';
 import Orb from './Orb';
 
-export default function ContactSection() {
+const ContactSection = memo(function ContactSection() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -297,4 +297,6 @@ export default function ContactSection() {
       </div>
     </section>
   );
-}
+});
+
+export default ContactSection;

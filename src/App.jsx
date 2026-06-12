@@ -139,6 +139,8 @@ function App() {
 
       <LenisSmoothScroll>
         <SplashCursor
+          SIM_RESOLUTION={32}
+          DYE_RESOLUTION={256}
           DENSITY_DISSIPATION={3.5}
           VELOCITY_DISSIPATION={2}
           PRESSURE={0.1}

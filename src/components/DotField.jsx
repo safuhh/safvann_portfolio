@@ -90,6 +90,7 @@ const DotField = memo(({
         }
       }
       dotsRef.current = dots;
+      canvasNeedsRedraw = true;
     }
 
     function onMouseMove(e) {
@@ -113,31 +114,15 @@ const DotField = memo(({
 
     let frameCount = 0;
 
-    function tick() {
-      if (!isVisible) {
-        rafRef.current = requestAnimationFrame(tick);
-        return;
-      }
-      frameCount++;
+    let canvasNeedsRedraw = true;
+
+    function drawDotsFrame(t) {
       const dots = dotsRef.current;
       const m = mouseRef.current;
       const { w, h } = sizeRef.current;
       const p = propsRef.current;
       const len = dots.length;
-      const t = frameCount * 0.02;
-
-      const targetEngagement = Math.min(m.speed / 5, 1);
-      engagement.current += (targetEngagement - engagement.current) * 0.06;
-      if (engagement.current < 0.001) engagement.current = 0;
       const eng = engagement.current;
-
-      glowOpacity.current += (eng - glowOpacity.current) * 0.08;
-
-      if (glowEl) {
-        glowEl.setAttribute('cx', m.x);
-        glowEl.setAttribute('cy', m.y);
-        glowEl.style.opacity = glowOpacity.current;
-      }
 
       ctx.clearRect(0, 0, w, h);
 
@@ -210,6 +195,37 @@ const DotField = memo(({
       }
 
       ctx.fill();
+    }
+
+    function tick() {
+      if (!isVisible) {
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+      frameCount++;
+      const p = propsRef.current;
+      const m = mouseRef.current;
+
+      const targetEngagement = Math.min(m.speed / 5, 1);
+      engagement.current += (targetEngagement - engagement.current) * 0.06;
+      if (engagement.current < 0.001) engagement.current = 0;
+      const eng = engagement.current;
+
+      glowOpacity.current += (eng - glowOpacity.current) * 0.08;
+
+      if (glowEl) {
+        glowEl.style.transform = `translate(${m.x}px, ${m.y}px)`;
+        glowEl.style.opacity = glowOpacity.current;
+      }
+
+      const isDynamic = p.waveAmplitude > 0 || p.sparkle || !p.bulgeOnly || eng > 0.01;
+      
+      if (isDynamic || canvasNeedsRedraw) {
+        drawDotsFrame(frameCount * 0.02);
+        if (!isDynamic) {
+          canvasNeedsRedraw = false;
+        }
+      }
 
       rafRef.current = requestAnimationFrame(tick);
     }
@@ -268,11 +284,11 @@ const DotField = memo(({
         </defs>
         <circle
           ref={glowRef}
-          cx="-9999"
-          cy="-9999"
+          cx="0"
+          cy="0"
           r={glowRadius}
           fill={`url(#${glowIdRef.current})`}
-          style={{ opacity: 0, willChange: 'opacity' }}
+          style={{ opacity: 0, willChange: 'opacity, transform' }}
         />
       </svg>
     </div>

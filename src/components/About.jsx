@@ -44,7 +44,7 @@ const AboutSection = memo(function AboutSection() {
             <div className="relative max-w-lg mx-auto lg:max-w-none">
               <div className="relative aspect-[3/4] rounded-3xl overflow-hidden bg-neutral-900 border border-white/10">
                 <img
-                  src="./aboutrihen.jpg"
+                  src="./aboutrihen.webp"
                   alt="Rihen Krishna - MERN Stack Developer"
                   loading="lazy"
                   decoding="async"

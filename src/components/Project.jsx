@@ -8,7 +8,7 @@ const projects = [
     title: 'Developer Portfolio',
     year: '2025',
     type: 'Portfolio Website',
-    image: "/portfolio.png",
+    image: "/portfolio.webp",
     url: null,
     description:
       "A visually engaging and interactive developer portfolio built to showcase projects, technical skills, and professional experience with smooth animations and modern UI design."
@@ -18,7 +18,7 @@ const projects = [
     title: 'Prowell Fitness',
     year: '2025',
     type: 'Fitness supplyment E-Commerce Platform',
-    image: '/E-com.png',
+    image: '/E-com.webp',
     url: 'https://prowellfitness.vercel.app/',
     description:
       "A full-featured e-commerce platform with secure authentication, product management, shopping cart functionality, and a streamlined checkout experience."
@@ -28,7 +28,7 @@ const projects = [
     title: 'Strevia Streaming',
     year: '2026',
     type: 'Streaming Platform',
-    image: '/Strevia.png',
+    image: '/Strevia.webp',
     url: 'https://strevia-streaming.vercel.app/',
     description:
       "A modern streaming platform focused on seamless media playback, personalized recommendations, user watchlists, and responsive cross-device viewing experiences."
@@ -38,7 +38,7 @@ const projects = [
     title: 'Fework',
     year: '2026',
     type: 'Hyperlocal Service Marketplace',
-    image: '/fework-ss.png',
+    image: '/fework-ss.webp',
     url: 'https://fework.vercel.app/',
     description:
       "A hyperlocal service marketplace designed to connect clients and professionals through project listings, streamlined communication, and efficient workflow management."
@@ -48,7 +48,7 @@ const projects = [
     title: 'The Lost Cabins',
     year: '2026',
     type: 'TheLostCabins Official Website',
-    image: '/LostCabins.png',
+    image: '/LostCabins.webp',
     url: 'https://thelostcabins.in/',
     description:
       "A premium resort and hospitality website crafted for TheLostCabins Resort to deliver an immersive booking experience with elegant visuals, smooth interactions, and nature-inspired design aesthetics."

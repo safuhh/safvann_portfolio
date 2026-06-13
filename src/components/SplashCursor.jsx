@@ -686,12 +686,18 @@ function SplashCursor({
     updateKeywords();
     initFramebuffers();
     let lastUpdateTime = Date.now();
+    let lastPointerMoveTime = Date.now();
     let colorUpdateTimer = 0.0;
 
     function updateFrame() {
-      const dt = calcDeltaTime(); // Always tick the clock
+      const dt = calcDeltaTime();
       requestAnimationFrame(updateFrame);
-      if (!isVisibleRef.current) return; // Skip GPU work when hidden
+      
+      const now = Date.now();
+      const isIdle = (now - lastPointerMoveTime) > 2000;
+      
+      if (!isVisibleRef.current || isIdle) return; // Skip GPU work when hidden or idle
+
       if (resizeCanvas()) initFramebuffers();
       updateColors(dt);
       applyInputs();
@@ -865,6 +871,7 @@ function SplashCursor({
       pointer.deltaX = 0;
       pointer.deltaY = 0;
       pointer.color = generateColor();
+      lastPointerMoveTime = Date.now();
     }
 
     function updatePointerMoveData(pointer, posX, posY, color) {
@@ -876,6 +883,7 @@ function SplashCursor({
       pointer.deltaY = correctDeltaY(pointer.texcoordY - pointer.prevTexcoordY);
       pointer.moved = Math.abs(pointer.deltaX) > 0 || Math.abs(pointer.deltaY) > 0;
       pointer.color = color;
+      lastPointerMoveTime = Date.now();
     }
 
     function updatePointerUpData(pointer) {

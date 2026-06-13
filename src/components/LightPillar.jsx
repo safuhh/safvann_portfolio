@@ -257,24 +257,22 @@ const LightPillar = ({
     }
 
     let lastTime = performance.now();
-    const targetFPS = effectiveQuality === 'high' ? 60 : effectiveQuality === 'medium' ? 30 : 20;
-    const frameTime = 1000 / targetFPS;
 
     const animate = currentTime => {
       if (!materialRef.current || !rendererRef.current || !sceneRef.current || !cameraRef.current) return;
 
       const deltaTime = currentTime - lastTime;
+      lastTime = currentTime;
 
-      if (deltaTime >= frameTime) {
-        if (isVisibleRef.current && isHomeVisibleRef.current) { // Only render when visible
-          timeRef.current += 0.016 * rotationSpeedRef.current;
-          const t = timeRef.current;
-          materialRef.current.uniforms.uTime.value = t;
-          materialRef.current.uniforms.uRotCos.value = Math.cos(t * 0.3);
-          materialRef.current.uniforms.uRotSin.value = Math.sin(t * 0.3);
-          rendererRef.current.render(sceneRef.current, cameraRef.current);
-        }
-        lastTime = currentTime - (deltaTime % frameTime);
+      if (isVisibleRef.current && isHomeVisibleRef.current) {
+        // Delta time scaling, typical target is 60fps (16.6ms)
+        const timeScale = Math.min(deltaTime / 16.666, 3.0); 
+        timeRef.current += 0.016 * rotationSpeedRef.current * timeScale;
+        const t = timeRef.current;
+        materialRef.current.uniforms.uTime.value = t;
+        materialRef.current.uniforms.uRotCos.value = Math.cos(t * 0.3);
+        materialRef.current.uniforms.uRotSin.value = Math.sin(t * 0.3);
+        rendererRef.current.render(sceneRef.current, cameraRef.current);
       }
 
       rafRef.current = requestAnimationFrame(animate);

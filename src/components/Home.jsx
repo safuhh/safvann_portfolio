@@ -84,7 +84,7 @@ const HomePage = memo(function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
 
             {/* LEFT SIDE */}
-            <div ref={leftRef} className="space-y-6" style={{ opacity: 0 }}>
+            <div ref={leftRef} className="space-y-6" style={{ opacity: 0, willChange: "transform, opacity" }}>
               <p className="text-neutral-500 tracking-[0.25em] uppercase text-xs sm:text-sm">
                 MERN Stack Developer
               </p>
@@ -95,7 +95,7 @@ const HomePage = memo(function HomePage() {
                     key={index}
                     ref={el => (wordsRef.current[index] = el)}
                     className={`font-bold text-neutral-100 ${word === "Modern" ? "italic" : ""}`}
-                    style={{ fontSize: "clamp(2.4rem, 5vw, 5rem)", opacity: 0 }}
+                    style={{ fontSize: "clamp(2.4rem, 5vw, 5rem)", opacity: 0, willChange: "transform, opacity" }}
                   >
                     {word}
                   </h1>
@@ -139,7 +139,7 @@ const HomePage = memo(function HomePage() {
             <div
               ref={rightRef}
               className="flex justify-center lg:justify-end"
-              style={{ opacity: 0 }}
+              style={{ opacity: 0, willChange: "transform, opacity" }}
             >
               <div className="text-center lg:text-right space-y-5">
                 <h2

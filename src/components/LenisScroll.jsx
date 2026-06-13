@@ -1,6 +1,7 @@
 // LenisScroll.jsx
 import { useEffect } from 'react';
 import Lenis from "lenis";
+import { gsap } from "gsap";
 
 export default function LenisScroll({ children }) {
   useEffect(() => {
@@ -21,16 +22,15 @@ export default function LenisScroll({ children }) {
     }
     window.scrollTo(0, 0);
 
-    let rafId;
-    function raf(time) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
-    rafId = requestAnimationFrame(raf);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      cancelAnimationFrame(rafId);
       lenis.destroy();
+      gsap.ticker.remove(lenis.raf);
       window.lenis = null;
     };
   }, []);

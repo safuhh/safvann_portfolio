@@ -132,7 +132,7 @@ const ContactSection = memo(function ContactSection() {
           <div className="reveal reveal-right flex flex-col justify-center space-y-6">
             
             <a
-              href="mailto:rihenww@gmail.com"
+              href="mailto:safvann000@gmail.com"
               className="group flex items-center justify-between p-5 sm:p-6 bg-neutral-800/40 backdrop-blur-xl border border-neutral-700/50 rounded-3xl hover:bg-neutral-800/80 hover:border-white transition-all duration-500 shadow-xl"
             >
               <div className="flex items-center space-x-4 sm:space-x-5">
@@ -152,7 +152,7 @@ const ContactSection = memo(function ContactSection() {
             </a>
 
             <a
-              href="https://wa.me/918075608994"
+              href="https://wa.me/918590872362"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center justify-between p-5 sm:p-6 bg-neutral-800/40 backdrop-blur-xl border border-neutral-700/50 rounded-3xl hover:bg-neutral-800/80 hover:border-[#25D366] transition-all duration-500 shadow-xl"

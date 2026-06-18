@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
+import RetroGrid from "./retro-grid";
 
 // Inline Button component
 const Button = React.forwardRef(({ className = "", children, ...props }, ref) => {
@@ -134,26 +135,28 @@ export default function PortfolioHero({ theme, setTheme }) {
       >
         {/* Hero Section */}
         <main className="relative min-h-screen flex flex-col pt-20">
+          <RetroGrid className="absolute inset-0 z-0 pointer-events-none" gridColor="#C3E41D" showScanlines={true} glowEffect={true} />
+          
           {/* Centered Main Name - Always Perfectly Centered */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4 pointer-events-none">
             <div className="relative text-center">
               <div>
                 <BlurText
-                  text="MAKING"
+                  text="BUILDING"
                   delay={100}
                   animateBy="letters"
                   direction="top"
-                  className="font-bold text-[100px] sm:text-[140px] md:text-[180px] lg:text-[210px] leading-[0.75] tracking-tighter uppercase justify-center whitespace-nowrap"
+                  className="font-bold text-[70px] sm:text-[140px] md:text-[180px] lg:text-[210px] leading-[0.75] tracking-tighter uppercase justify-center whitespace-nowrap"
                   style={{ color: "#C3E41D", fontFamily: "'Fira Code', monospace" }}
                 />
               </div>
               <div>
                 <BlurText
-                  text="WEB"
+                  text="WEBSITES"
                   delay={100}
                   animateBy="letters"
                   direction="top"
-                  className="font-bold text-[100px] sm:text-[140px] md:text-[180px] lg:text-[210px] leading-[0.75] tracking-tighter uppercase justify-center whitespace-nowrap"
+                  className="font-bold text-[60px] sm:text-[140px] md:text-[180px] lg:text-[150px] leading-[0.75] tracking-tighter uppercase justify-center whitespace-nowrap"
                   style={{ color: "#C3E41D", fontFamily: "'Fira Code', monospace" }}
                 />
               </div>

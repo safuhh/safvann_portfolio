@@ -26,7 +26,7 @@ const AboutSection = memo(function AboutSection() {
   return (
     <section
       id="about"
-      className="relative min-h-screen overflow-hidden py-20 sm:py-28 md:py-36"
+      className="relative min-h-screen overflow-hidden pb-20 pt-10 sm:pb-28 sm:pt-16 md:pb-36 md:pt-24"
     >
       <div className="relative z-10 max-w-[1600px] mx-auto px-5 md:px-12 lg:px-24">
         {/* HEADER */}

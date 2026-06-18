@@ -11,16 +11,18 @@ const ContactSection = memo(function ContactSection() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('active');
-          } else {
-            entry.target.classList.remove('active');
+            observer.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.1 }
     );
 
-    const elements = document.querySelectorAll('.reveal');
-    elements.forEach((el) => observer.observe(el));
+    const section = document.getElementById('contact');
+    if (section) {
+      const elements = section.querySelectorAll('.reveal');
+      elements.forEach((el) => observer.observe(el));
+    }
 
     return () => observer.disconnect();
   }, []);

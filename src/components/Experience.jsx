@@ -35,16 +35,18 @@ responsibilities: [
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('active');
-          } else {
-            entry.target.classList.remove('active');
+            observer.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.1 }
     );
 
-    const elements = document.querySelectorAll('.reveal');
-    elements.forEach((el) => observer.observe(el));
+    const section = document.getElementById('experience');
+    if (section) {
+      const elements = section.querySelectorAll('.reveal');
+      elements.forEach((el) => observer.observe(el));
+    }
 
     const themeObserver = new IntersectionObserver(
       (entries) => {
@@ -59,7 +61,6 @@ responsibilities: [
       { threshold: 0.15 } // Trigger when 15% of section is visible
     );
 
-    const section = document.getElementById('experience');
     if (section) themeObserver.observe(section);
 
     return () => {
@@ -122,21 +123,7 @@ responsibilities: [
 
               {/* Content Card */}
               <div className={`relative overflow-hidden ml-6 md:ml-20 ${theme === 'light' ? 'bg-white border-neutral-300 hover:border-black hover:bg-neutral-50' : 'bg-neutral-900/90 border-neutral-700/50 hover:border-neutral-500 hover:bg-neutral-800'} border rounded-lg p-5 md:p-8 transition-all duration-500`}>
-                <div className="absolute inset-0 z-0">
-                  <DotField
-                    dotRadius={1.5}
-                    dotSpacing={14}
-                    bulgeStrength={67}
-                    glowRadius={160}
-                    sparkle={false}
-                    waveAmplitude={0}
-                    cursorRadius={500}
-                    cursorForce={0.1}
-                    bulgeOnly
-                    gradientFrom="#A855F7"
-                    gradientTo="#B497CF"
-                    glowColor="#120F17"
-                  />
+                <div className="absolute inset-0 z-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                 </div>
                 <div className="relative z-10 grid md:grid-cols-3 gap-8">
                   {/* Left Column - Main Info */}

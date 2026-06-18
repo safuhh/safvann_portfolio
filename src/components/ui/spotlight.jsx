@@ -5,12 +5,12 @@ export const Spotlight = ({ className, fill = "white" }) => {
   return (
     <div
       className={cn(
-        "pointer-events-none absolute z-[1] w-[200vw] h-[150vh] -top-[50vh] -left-[50vw] opacity-30 lg:opacity-20",
+        "pointer-events-none absolute z-[1] w-[600px] h-[600px] md:w-[800px] md:h-[800px] opacity-20",
         className
       )}
       style={{
-        background: `radial-gradient(ellipse at center, ${fill} 0%, transparent 60%)`,
-        transform: "rotate(20deg) scale(0.8)",
+        background: `radial-gradient(circle at center, ${fill} 0%, transparent 70%)`,
+        transform: "translateZ(0)",
       }}
     />
   );

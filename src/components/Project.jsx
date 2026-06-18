@@ -1,6 +1,27 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 
 const ProjectsSection = memo(function ProjectsSection() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const section = document.getElementById('projects');
+    if (section) {
+      const elements = section.querySelectorAll('.reveal');
+      elements.forEach((el) => observer.observe(el));
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
 const projects = [
 {
@@ -105,7 +126,7 @@ const projects = [
                     {project.description}
                   </p>
 
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mt-4">
+                  <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-6 mt-4 ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
                      <span className="text-neutral-500 font-medium text-lg hidden sm:block">
                        {project.year}
                      </span>

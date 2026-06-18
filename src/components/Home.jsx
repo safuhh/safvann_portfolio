@@ -63,7 +63,7 @@ const HomePage = memo(function HomePage() {
     >
       {/* Background Spotlight */}
       <Spotlight
-        className="-top-40 left-0 md:left-60 md:-top-20"
+        className="-top-40 right-0 md:right-20 lg:right-40 md:-top-20"
         fill="white"
       />
 
@@ -123,16 +123,17 @@ const HomePage = memo(function HomePage() {
               </div>
             </div>
 
-            {/* RIGHT SIDE */}
             <div
               ref={rightRef}
               className="relative hidden lg:flex w-full h-[600px] justify-end"
-              style={{ opacity: 0 }}
+              style={{ opacity: 0, transform: 'translateZ(0)' }}
             >
-              <SplineScene 
-                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                className="w-full h-full absolute inset-0 pointer-events-auto"
-              />
+              <div className="w-full h-full absolute inset-0 pointer-events-none">
+                <SplineScene 
+                  scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                  className="w-full h-full"
+                />
+              </div>
             </div>
 
           </div>

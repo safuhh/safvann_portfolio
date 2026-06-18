@@ -2,7 +2,7 @@ import React, { useEffect, memo } from 'react';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import { FiGithub as Github, FiLinkedin as Linkedin, FiTwitter as Twitter, FiInstagram as Instagram } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
-import Orb from './Orb';
+import InteractiveNeuralVortexBackground from './ui/interactive-neural-vortex-background';
 
 const ContactSection = memo(function ContactSection() {
   useEffect(() => {
@@ -41,13 +41,7 @@ const ContactSection = memo(function ContactSection() {
   return (
     <section id="contact" className="min-h-screen relative overflow-hidden py-20">
       <div className="absolute inset-0 -z-10 pointer-events-none">
-        <Orb
-          hoverIntensity={2}
-          rotateOnHover
-          hue={0}
-          forceHoverState={false}
-          backgroundColor="#000000"
-        />
+        <InteractiveNeuralVortexBackground />
       </div>
       <div className="max-w-[1600px] mx-auto px-5 md:px-12 lg:px-20 xl:px-20 relative z-10">
 

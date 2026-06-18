@@ -150,8 +150,7 @@ responsibilities: [
                         {exp.responsibilities.map((resp, idx) => (
                           <li 
                             key={idx}
-                            className={`flex items-start ${theme === 'light' ? 'text-neutral-600' : 'text-neutral-400'} reveal reveal-left transition-colors duration-700`}
-                            style={{ transitionDelay: `${(idx + 1) * 30}ms` }}
+                            className={`flex items-start ${theme === 'light' ? 'text-neutral-600' : 'text-neutral-400'} transition-colors duration-700`}
                           >
                             <span className="text-neutral-500 mr-3 mt-1">▹</span>
                             <span>{resp}</span>

@@ -23,7 +23,7 @@ function App() {
 
       <LenisSmoothScroll>
         <Navbar />
-        <HomePage />
+        <HomePage theme={theme} setTheme={setTheme} />
         <div className={`relative z-10 w-full ${theme === 'light' ? 'bg-white' : 'bg-black'} transition-colors duration-500`}>
           <Suspense fallback={<Loader />}>
             <AboutSection />

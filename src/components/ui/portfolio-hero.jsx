@@ -139,7 +139,7 @@ export default function PortfolioHero({ theme, setTheme }) {
             <div className="relative text-center">
               <div>
                 <BlurText
-                  text="SAFVAN"
+                  text="MAKING"
                   delay={100}
                   animateBy="letters"
                   direction="top"
@@ -149,7 +149,7 @@ export default function PortfolioHero({ theme, setTheme }) {
               </div>
               <div>
                 <BlurText
-                  text="MERN"
+                  text="WEB"
                   delay={100}
                   animateBy="letters"
                   direction="top"

@@ -19,12 +19,12 @@ function App() {
   const [theme, setTheme] = useState('dark');
 
   return (
-    <div className={`transition-colors duration-1000 ease-in-out ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'}`}>
+    <div className={`transition-colors duration-500 ease-in-out ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'}`}>
 
       <LenisSmoothScroll>
         <Navbar />
         <HomePage />
-        <div className={`relative z-10 w-full ${theme === 'light' ? 'bg-white' : 'bg-black'} transition-colors duration-1000`}>
+        <div className={`relative z-10 w-full ${theme === 'light' ? 'bg-white' : 'bg-black'} transition-colors duration-500`}>
           <Suspense fallback={<Loader />}>
             <AboutSection />
             <ExperienceSection theme={theme} setTheme={setTheme} />

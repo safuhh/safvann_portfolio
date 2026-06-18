@@ -7,7 +7,7 @@ export default function LenisScroll({ children }) {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
-      lerp: 0.08,
+      lerp: 0.1,
       wheelMultiplier: 0.9,
       infinite: false,
       gestureOrientation: 'vertical',
@@ -25,8 +25,6 @@ export default function LenisScroll({ children }) {
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
-
-    gsap.ticker.lagSmoothing(0);
 
     return () => {
       lenis.destroy();

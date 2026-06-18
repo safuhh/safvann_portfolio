@@ -128,7 +128,10 @@ const HomePage = memo(function HomePage() {
               className="relative hidden lg:flex w-full h-[600px] justify-end"
               style={{ opacity: 0, transform: 'translateZ(0)' }}
             >
-              <div className="w-full h-full absolute inset-0 pointer-events-none">
+              <div 
+                className="w-full h-full absolute inset-0 pointer-events-auto"
+                style={{ visibility: isHomeVisible ? 'visible' : 'hidden' }}
+              >
                 <SplineScene 
                   scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                   className="w-full h-full"

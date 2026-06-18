@@ -62,14 +62,14 @@ const projects = [
           {projects.map((project, index) => (
             <div
               key={project.id}
-              className="sticky"
+              className="static lg:sticky"
               style={{ 
                 top: `calc(100px + ${index * 30}px)`,
                 zIndex: index + 1
               }}
             >
               <div
-                className={`group flex flex-col ${index % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-16 items-center bg-neutral-900 border border-neutral-800 rounded-[2.5rem] p-6 sm:p-8 lg:p-12  transition-all duration-500 shadow-2xl`}
+                className={`group flex flex-col ${index % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 lg:gap-16 items-center bg-neutral-900 border border-neutral-800 rounded-[2.5rem] p-6 sm:p-8 lg:p-12 transition-all duration-500 shadow-2xl`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 {/* Image Container */}
@@ -105,8 +105,8 @@ const projects = [
                     {project.description}
                   </p>
 
-                  <div className="flex items-center justify-between">
-                     <span className="text-neutral-500 font-medium text-lg">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mt-4">
+                     <span className="text-neutral-500 font-medium text-lg hidden sm:block">
                        {project.year}
                      </span>
                      {/* View Project Button */}
@@ -116,9 +116,10 @@ const projects = [
                          target="_blank"
                          rel="noopener noreferrer"
                          aria-label={`View ${project.title}`}
-                         className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-teal-500/20 to-purple-500/20 border border-teal-400/30 text-white shadow-lg shadow-teal-500/10 hover:border-teal-400/60 hover:shadow-teal-500/30 hover:scale-110 transition-all duration-300 group/btn"
+                         className="flex items-center justify-center gap-3 w-full sm:w-auto px-8 py-4 sm:py-3 sm:px-6 rounded-full bg-white text-black font-semibold text-sm tracking-widest uppercase hover:scale-[1.02] transition-all duration-300"
                        >
-                         <svg className="w-6 h-6 sm:w-7 sm:h-7 transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                         <span>View Project</span>
+                         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                            <line x1="7" y1="17" x2="17" y2="7"></line>
                            <polyline points="7 7 17 7 17 17"></polyline>
                          </svg>

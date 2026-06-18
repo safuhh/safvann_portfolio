@@ -3,56 +3,36 @@ import React, { memo } from 'react';
 const ProjectsSection = memo(function ProjectsSection() {
 
 const projects = [
-  {
-    id: 1,
-    title: 'Developer Portfolio',
-    year: '2025',
-    type: 'Portfolio Website',
-    image: "/portfolio.webp",
-    url: null,
-    description:
-      "A visually engaging and interactive developer portfolio built to showcase projects, technical skills, and professional experience with smooth animations and modern UI design."
-  },
-  {
-    id: 2,
-    title: 'Prowell Fitness',
-    year: '2025',
-    type: 'Fitness supplyment E-Commerce Platform',
-    image: '/E-com.webp',
-    url: 'https://prowellfitness.vercel.app/',
-    description:
-      "A full-featured e-commerce platform with secure authentication, product management, shopping cart functionality, and a streamlined checkout experience."
-  },
-  {
-    id: 3,
-    title: 'Strevia Streaming',
-    year: '2026',
-    type: 'Streaming Platform',
-    image: '/Strevia.webp',
-    url: 'https://strevia-streaming.vercel.app/',
-    description:
-      "A modern streaming platform focused on seamless media playback, personalized recommendations, user watchlists, and responsive cross-device viewing experiences."
-  },
-  {
-    id: 4,
-    title: 'Fework',
-    year: '2026',
-    type: 'Hyperlocal Service Marketplace',
-    image: '/fework-ss.webp',
-    url: 'https://fework.vercel.app/',
-    description:
-      "A hyperlocal service marketplace designed to connect clients and professionals through project listings, streamlined communication, and efficient workflow management."
-  },
-  {
-    id: 5,
-    title: 'The Lost Cabins',
-    year: '2026',
-    type: 'TheLostCabins Official Website',
-    image: '/LostCabins.webp',
-    url: 'https://thelostcabins.in/',
-    description:
-      "A premium resort and hospitality website crafted for TheLostCabins Resort to deliver an immersive booking experience with elegant visuals, smooth interactions, and nature-inspired design aesthetics."
-  },
+{
+  id: 1,
+  title: 'MediFind',
+  year: '2025',
+  type: 'Healthcare Technology Platform',
+  image: '/medi.png',
+  url: 'https://medifind-client-side.vercel.app/',
+  description:
+    'A modern healthcare platform connecting users with medical services through an intuitive and responsive experience. Built using Next.js, TypeScript, Express.js, and MongoDB, featuring secure authentication, appointment management, RESTful APIs, and scalable backend architecture.'
+},
+{
+  id: 2,
+  title: 'Vyntra',
+  year: '2026',
+  type: 'Full-Stack E-Commerce Platform',
+  image: '/vyntra.png',
+  url: 'https://vyntra-dqdt.vercel.app/',
+  description:
+    'A modern full-stack e-commerce platform built with React, Express.js, and MongoDB. Features secure user authentication, product browsing, advanced filtering, shopping cart management, order processing, responsive design, and scalable REST APIs for a seamless online shopping experience.'
+},
+{
+  id: 3,
+  title: 'Zoelume',
+  year: '2026',
+  type: 'Movie Discovery Platform',
+  image: '/zoe.png',
+  url: 'https://zoelume.vercel.app/',
+  description:
+    'A modern movie discovery platform powered by the TMDB API, allowing users to explore trending, popular, and top-rated movies. Features include advanced search, detailed movie information, genre-based filtering, responsive design, and a visually engaging user experience optimized for performance.'
+}
 ];
 
   return (
@@ -62,7 +42,7 @@ const projects = [
         {/* Header */}
         <div className="text-center mb-16 reveal">
           <p className="text-neutral-500 tracking-[0.3em] text-sm uppercase mb-6">
-            — PORTFOLIO —
+            — PROJECTS —
           </p>
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-neutral-100 mb-4">
             Featured
@@ -75,14 +55,7 @@ const projects = [
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16 reveal">
-            <button
-              className={'px-6 py-3 rounded-full font-medium transition-all duration-300 bg-neutral-100 text-black border border-neutral-700'}
-            >
-              All Projects
-            </button>
-        </div>
+      
 
         {/* Projects Grid */}
         <div className="flex flex-col gap-16 md:gap-24 pb-24">
@@ -101,13 +74,13 @@ const projects = [
               >
                 {/* Image Container */}
                 <div className="w-full lg:w-3/5">
-                  <div className="relative rounded-3xl overflow-hidden aspect-[4/3] sm:aspect-video lg:aspect-[4/3] xl:aspect-video bg-neutral-800/50 flex items-center justify-center p-4 sm:p-8">
+                  <div className="relative rounded-3xl overflow-hidden aspect-[4/3] sm:aspect-video lg:aspect-[4/3] xl:aspect-video bg-neutral-800/50">
                     {project.image ? (
                       <img
                         src={project.image}
                         alt={project.title}
                         loading="lazy"
-                        className="max-w-full max-h-full rounded-xl shadow-2xl group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-700 ease-out"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-8xl text-neutral-600">

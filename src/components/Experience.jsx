@@ -5,21 +5,25 @@ const ExperienceSection = memo(function ExperienceSection({ theme = 'dark', setT
   const experiences = [
 {
 id: 1,
-period: 'JULY 2025 - PRESENT',
+period: 'AUG 2025 - PRESENT',
 title: 'MERN Stack Developer',
 company: 'Bridgeon Solutions',
 type: 'On-site',
 description:
 'Working as a MERN Stack Developer with experience in designing, developing, and maintaining full-stack web applications. Skilled in building scalable solutions using MongoDB, Express.js, React.js, Node.js, and Next.js while collaborating with cross-functional teams to deliver high-quality products.',
 responsibilities: [
-'Developing and maintaining full-stack web applications using the MERN stack',
-'Building responsive and modern user interfaces with React.js, Next.js, Tailwind CSS, and Bootstrap',
-'Designing and integrating RESTful APIs using Node.js and Express.js',
-'Managing databases and data models using MongoDB',
-'Optimizing application performance, security, and user experience',
-'Collaborating with designers, developers, and stakeholders to deliver business requirements',
-'Using Git and GitHub for version control and team collaboration',
-'Deploying and maintaining applications on cloud platforms and production environments'
+  'Built full-stack web applications using the MERN stack',
+  'Developed responsive UIs with React.js, Next.js, TypeScript, and Tailwind CSS',
+  'Designed and integrated RESTful APIs using Node.js and Express.js',
+  'Managed MongoDB databases and optimized application performance',
+  'Implemented secure authentication and authorization systems',
+  'Integrated third-party APIs and cloud services',
+  'Collaborated with teams to deliver scalable software solutions',
+  'Used Git and GitHub for version control and collaboration',
+  'Deployed applications on AWS, Render, Vercel, and Netlify',
+  'Managed Linux servers, Nginx, and PM2 production environments',
+  'Performed testing, debugging, and application maintenance',
+  'Applied modern development best practices for security and scalability'
 ],
       technologies: ['HTML', 'CSS', 'JavaScript','TypeScript', 'Bootstrap',"Tailwind", "Redux", 'React.js','Next.js', 'Node.js', 'MongoDB', 'Express.js', 'Git','AWS','GitHub', 'Postman', 'Responsive Design']
     }
@@ -160,7 +164,7 @@ responsibilities: [
                           <li 
                             key={idx}
                             className={`flex items-start ${theme === 'light' ? 'text-neutral-600' : 'text-neutral-400'} reveal reveal-left transition-colors duration-700`}
-                            style={{ transitionDelay: `${(idx + 1) * 100}ms` }}
+                            style={{ transitionDelay: `${(idx + 1) * 30}ms` }}
                           >
                             <span className="text-neutral-500 mr-3 mt-1">▹</span>
                             <span>{resp}</span>

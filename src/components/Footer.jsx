@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
-import { Github, Linkedin, Mail, Twitter, Instagram, ArrowUp, Heart } from 'lucide-react';
+import { Mail, ArrowUp, Heart } from 'lucide-react';
+import { FiGithub as Github, FiLinkedin as Linkedin, FiTwitter as Twitter, FiInstagram as Instagram } from 'react-icons/fi';
 
 const Footer = memo(function Footer() {
   const scrollToTop = () => {
@@ -7,11 +8,9 @@ const Footer = memo(function Footer() {
   };
 
   const socialLinks = [
-    { name: 'GitHub', Icon: Github, href: 'https://github.com/riihennn', color: 'hover:text-white' },
-    { name: 'LinkedIn', Icon: Linkedin, href: 'https://www.linkedin.com/in/rihenkrishna/', color: 'hover:text-white' },
-    { name: 'Twitter', Icon: Twitter, href: 'https://x.com/riihennn', color: 'hover:text-white' },
-    { name: 'Instagram', Icon: Instagram, href: 'https://www.instagram.com/riihennn/', color: 'hover:text-white' },
-    { name: 'Email', Icon: Mail, href: 'mailto:rihenww@gmail.com', color: 'hover:text-white' }
+    { name: 'GitHub', Icon: Github, href: 'https://github.com/safuhh', color: 'hover:text-white' },
+    { name: 'LinkedIn', Icon: Linkedin, href: 'https://www.linkedin.com/in/safvan-p-/', color: 'hover:text-white' },
+    { name: 'Email', Icon: Mail, href: 'mailto:safvann000@gmail.com', color: 'hover:text-white' }
   ];
 
   const quickLinks = [
@@ -37,8 +36,8 @@ const Footer = memo(function Footer() {
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-3 mb-6">
                 <div>
-                  <h3 className="text-neutral-100 font-bold text-xl">RIHEN KRISHNA</h3>
-                  <p className="text-neutral-400 text-sm">MERN Stack Developer</p>
+                  <h3 className="text-neutral-100 font-bold text-xl">MUHAMMED SAFVAN </h3>
+                  <p className="text-neutral-400 text-sm">Full Stack Developer</p>
                 </div>
               </div>
               <p className="text-neutral-400 leading-relaxed mb-6 max-w-md">
@@ -92,11 +91,11 @@ const Footer = memo(function Footer() {
               <ul className="space-y-4">
                 <li>
                   <a
-                    href="mailto:rihen@example.com"
+                    href="mailto:safvann000@gmail.com"
                     className="text-neutral-400 hover:text-white transition-colors duration-300 flex items-start space-x-3"
                   >
                     <Mail className="w-5 h-5 mt-0.5 flex-shrink-0" />
-                    <span>rihenww@gmail.com</span>
+                    <span>safvann000@gmail.com</span>
                   </a>
                 </li>
                 <li className="text-neutral-400 flex items-start space-x-3">
@@ -104,7 +103,7 @@ const Footer = memo(function Footer() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span>Malappuram, Kerala, India</span>
+                  <span>Palakkad, Kerala, India</span>
                 </li>
               </ul>
             </div>
@@ -115,7 +114,7 @@ const Footer = memo(function Footer() {
         <div className="border-t border-neutral-800/50 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-neutral-400 text-sm text-center md:text-left">
-              © 2025 Rihen Krishna. All rights reserved. Made with and React
+              © 2025 MUHAMMED SAFVAN P. All rights reserved.
             </p>
             <button
               onClick={scrollToTop}

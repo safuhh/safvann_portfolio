@@ -95,7 +95,7 @@ const Navbar = memo(function Navbar() {
           {/* LOGO */}
           <div className="flex flex-col">
             <span className="text-neutral-100 font-bold text-sm tracking-wider">
-              RIHEN KRISHNA
+            MUHAMMED SAFVAN 
             </span>
             <span className="text-neutral-400 font-semibold text-xs tracking-wider">
               MERN DEVELOPER

@@ -10,6 +10,11 @@ const DotField = memo(({
   waveAmplitude = 0,
   gradientFrom = 'rgba(168, 85, 247, 0.35)',
   gradientTo = 'rgba(180, 151, 207, 0.25)',
+  bulgeStrength,
+  glowRadius,
+  cursorRadius,
+  cursorForce,
+  glowColor,
   ...rest
 }) => {
   const canvasRef = useRef(null);
@@ -31,7 +36,7 @@ const DotField = memo(({
     observer.observe(canvas.parentElement);
 
     const ctx = canvas.getContext('2d', { alpha: true });
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1);
     let resizeTimer;
 
     function resize() {
@@ -122,15 +127,12 @@ const DotField = memo(({
         if (p.sparkle) {
           const hash = ((i * 2654435761) ^ (frameCount >> 3)) >>> 0;
           if ((hash % 100) < 3) {
-            ctx.moveTo(drawX + rad * 1.8, drawY);
-            ctx.arc(drawX, drawY, rad * 1.8, 0, TWO_PI);
+            ctx.rect(drawX - rad * 1.8, drawY - rad * 1.8, rad * 3.6, rad * 3.6);
           } else {
-            ctx.moveTo(drawX + rad, drawY);
-            ctx.arc(drawX, drawY, rad, 0, TWO_PI);
+            ctx.rect(drawX - rad, drawY - rad, rad * 2, rad * 2);
           }
         } else {
-          ctx.moveTo(drawX + rad, drawY);
-          ctx.arc(drawX, drawY, rad, 0, TWO_PI);
+          ctx.rect(drawX - rad, drawY - rad, rad * 2, rad * 2);
         }
       }
 

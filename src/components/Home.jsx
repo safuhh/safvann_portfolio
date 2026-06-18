@@ -141,23 +141,7 @@ const HomePage = memo(function HomePage() {
               className="flex justify-center lg:justify-end"
               style={{ opacity: 0, willChange: "transform, opacity" }}
             >
-              <div className="text-center lg:text-right space-y-5">
-                <h2
-                  className="font-bold tracking-widest text-neutral-100"
-                  style={{ fontSize: "clamp(1.3rem, 2.5vw, 2.2rem)" }}
-                >
-                  RIHEN KRISHNA
-                </h2>
-
-                <p
-                  className="text-neutral-400 font-semibold"
-                  style={{ fontSize: "clamp(0.9rem, 1.4vw, 1.3rem)" }}
-                >
-                  Full-Stack Developer
-                </p>
-
-                <div className="w-20 h-[2px] bg-gradient-to-r from-violet-500 to-pink-400 mx-auto lg:ml-auto"></div>
-              </div>
+              
             </div>
 
           </div>

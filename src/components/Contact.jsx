@@ -1,89 +1,10 @@
-import React, { useState, useEffect, memo } from 'react';
-import { Mail, MapPin, Phone, Send, Github, Linkedin, Twitter, Instagram } from 'lucide-react';
+import React, { useEffect, memo } from 'react';
+import { Mail, MapPin, Phone } from 'lucide-react';
+import { FiGithub as Github, FiLinkedin as Linkedin, FiTwitter as Twitter, FiInstagram as Instagram } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 import Orb from './Orb';
 
 const ContactSection = memo(function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState({ type: '', message: '' });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async () => {
-    // Validate fields
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Please fill in all fields.'
-      });
-      setTimeout(() => setSubmitStatus({ type: '', message: '' }), 3000);
-      return;
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Please enter a valid email address.'
-      });
-      setTimeout(() => setSubmitStatus({ type: '', message: '' }), 3000);
-      return;
-    }
-
-    setIsSubmitting(true);
-    setSubmitStatus({ type: '', message: '' });
-
-    try {
-      const response = await fetch(
-        'https://api.emailjs.com/api/v1.0/email/send',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            service_id: 'service_8il2sh1',
-            template_id: 'template_v8pvmmh',
-            user_id: '2KJkN5doDMaB1qXi8',
-            template_params: {
-              name: formData.name,
-              email: formData.email,
-              subject: formData.subject,
-              message: formData.message
-            }
-          })
-        }
-      );
-
-      if (response.ok) {
-        setSubmitStatus({
-          type: 'success',
-          message: 'Message sent successfully! I\'ll get back to you soon.'
-        });
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        throw new Error('Failed to send message');
-      }
-    } catch (error) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Failed to send message. Please email me directly at rihenww@gmail.com'
-      });
-    } finally {
-      setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus({ type: '', message: '' }), 5000);
-    }
-  };
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -102,19 +23,17 @@ const ContactSection = memo(function ContactSection() {
     elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, [submitStatus.message]); // Re-observe if elements change (like status box)
+  }, []);
 
   const contactInfo = [
-    { Icon: Mail, title: "Email", info: "rihenww@gmail.com", href: "mailto:rihenww@gmail.com" },
-    { Icon: Phone, title: "Phone", info: "+91 80756 08994", href: "tel:+918075608994" },
-    { Icon: MapPin, title: "Location", info: "Kozhikode, Kerala, India", href: "#" },
+    { Icon: Mail, title: "Email", info: "safvann000@gmail.com", href: "mailto:safvann000@gmail.com" },
+    { Icon: Phone, title: "Phone", info: "+91 8590872362", href: "tel:+918590872362" },
+    { Icon: MapPin, title: "Location", info: "Palakkad, Kerala, India", href: "#" },
   ];
 
   const socialLinks = [
-    { Icon: Github, href: "https://github.com/riihennn", label: "GitHub" },
-    { Icon: Linkedin, href: "https://www.linkedin.com/in/rihenkrishna/", label: "LinkedIn" },
-    { Icon: Twitter, href: "https://x.com/riihennn", label: "Twitter" },
-    { Icon: Instagram, href: "https://www.instagram.com/riihennn/", label: "Instagram" },
+    { Icon: Github, href: "https://github.com/safuhh", label: "GitHub" },
+    { Icon: Linkedin, href: "https://www.linkedin.com/in/safvan-p-/", label: "LinkedIn" },
   ];
 
   return (
@@ -141,7 +60,7 @@ const ContactSection = memo(function ContactSection() {
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto items-center">
 
           {/* LEFT SIDE */}
           <div className="space-y-8 reveal reveal-left">
@@ -209,89 +128,51 @@ const ContactSection = memo(function ContactSection() {
             </div>
           </div>
 
-          {/* RIGHT SIDE — FORM */}
-          <div className="reveal reveal-right">
-            <div className="bg-neutral-800/40 backdrop-blur-xl border border-neutral-700/50 rounded-2xl p-8 space-y-6">
-
-              {/* Status Message */}
-              {submitStatus.message && (
-                <div 
-                  className={`p-4 rounded-lg transition-all duration-300 ${
-                    submitStatus.type === 'success' 
-                      ? 'bg-green-500/20 border border-green-500/50 text-green-200' 
-                      : 'bg-red-500/20 border border-red-500/50 text-red-200'
-                  }`}
-                >
-                  {submitStatus.message}
+          {/* RIGHT SIDE — DIRECT CONTACT BUTTONS */}
+          <div className="reveal reveal-right flex flex-col justify-center space-y-6">
+            
+            <a
+              href="mailto:rihenww@gmail.com"
+              className="group flex items-center justify-between p-5 sm:p-6 bg-neutral-800/40 backdrop-blur-xl border border-neutral-700/50 rounded-3xl hover:bg-neutral-800/80 hover:border-white transition-all duration-500 shadow-xl"
+            >
+              <div className="flex items-center space-x-4 sm:space-x-5">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-neutral-700 to-neutral-800 flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform duration-500">
+                  <Mail className="w-6 h-6 sm:w-7 sm:h-7 text-neutral-100" />
                 </div>
-              )}
-
-              {/* Name */}
-              <div className="reveal" style={{ transitionDelay: '100ms' }}>
-                <label className="block text-neutral-100 font-medium mb-2">Your Name *</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-700/50 rounded-lg text-neutral-100 focus:ring-2 focus:ring-neutral-500/20 focus:outline-none"
-                  placeholder="Enter Your Name"
-                />
+                <div className="text-left">
+                  <p className="text-neutral-400 text-xs sm:text-sm font-medium tracking-wider uppercase mb-1">Direct Message</p>
+                  <h3 className="text-xl sm:text-2xl font-bold text-neutral-100">Email Me</h3>
+                </div>
               </div>
-
-              {/* Email */}
-              <div className="reveal" style={{ transitionDelay: '200ms' }}>
-                <label className="block text-neutral-100 font-medium mb-2">Your Email *</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-700/50 rounded-lg text-neutral-100 focus:ring-2 focus:ring-neutral-500/20 focus:outline-none"
-                  placeholder="Enter Your Email"
-                />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-neutral-600 flex items-center justify-center group-hover:bg-white group-hover:border-white transition-all duration-500">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-400 group-hover:text-black transform group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
               </div>
+            </a>
 
-              {/* Subject */}
-              <div className="reveal" style={{ transitionDelay: '300ms' }}>
-                <label className="block text-neutral-100 font-medium mb-2">Subject *</label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-700/50 rounded-lg text-neutral-100 focus:ring-2 focus:ring-neutral-500/20 focus:outline-none"
-                  placeholder="Project Inquiry"
-                />
+            <a
+              href="https://wa.me/918075608994"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between p-5 sm:p-6 bg-neutral-800/40 backdrop-blur-xl border border-neutral-700/50 rounded-3xl hover:bg-neutral-800/80 hover:border-[#25D366] transition-all duration-500 shadow-xl"
+            >
+              <div className="flex items-center space-x-4 sm:space-x-5">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#25D366]/20 to-[#128C7E]/20 border border-[#25D366]/30 flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform duration-500">
+                  <FaWhatsapp className="w-6 h-6 sm:w-7 sm:h-7 text-[#25D366]" />
+                </div>
+                <div className="text-left">
+                  <p className="text-neutral-400 text-xs sm:text-sm font-medium tracking-wider uppercase mb-1">Instant Chat</p>
+                  <h3 className="text-xl sm:text-2xl font-bold text-neutral-100">WhatsApp</h3>
+                </div>
               </div>
-
-              {/* Message */}
-              <div className="reveal" style={{ transitionDelay: '400ms' }}>
-                <label className="block text-neutral-100 font-medium mb-2">Message *</label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={5}
-                  className="w-full px-4 py-3 bg-neutral-900/50 border border-neutral-700/50 rounded-lg text-neutral-100 resize-none focus:ring-2 focus:ring-neutral-500/20 focus:outline-none"
-                  placeholder="Tell me about your project..."
-                />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-neutral-600 flex items-center justify-center group-hover:bg-[#25D366] group-hover:border-[#25D366] transition-all duration-500">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-400 group-hover:text-white transform group-hover:translate-x-1 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
               </div>
+            </a>
 
-              {/* Submit */}
-              <div className="reveal" style={{ transitionDelay: '500ms' }}>
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="w-full px-6 py-4 bg-neutral-100 hover:bg-white text-black font-semibold rounded-lg flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-                >
-                  <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
-                  {!isSubmitting && <Send className="w-5 h-5" />}
-                </button>
-              </div>
-
-            </div>
           </div>
         </div>
       </div>

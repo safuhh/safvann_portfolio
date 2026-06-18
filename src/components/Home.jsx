@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, memo } from "react";
 import { gsap } from "gsap";
-import LightPillar from "./LightPillar";
+import { Spotlight } from "@/components/ui/spotlight";
+import { SplineScene } from "@/components/ui/splite";
 
 const HomePage = memo(function HomePage() {
   const leftRef = useRef(null);
@@ -28,12 +29,12 @@ const HomePage = memo(function HomePage() {
       "-=0.6"
     );
 
-    // Right side slides from right
+    // Right side fades in softly without moving the heavy WebGL canvas
     tl.fromTo(
       rightRef.current,
-      { opacity: 0, x: 80 },
-      { opacity: 1, x: 0, duration: 1 },
-      "-=0.8"
+      { opacity: 0 },
+      { opacity: 1, duration: 2 },
+      "-=0.5"
     );
 
     return () => tl.kill();
@@ -60,24 +61,11 @@ const HomePage = memo(function HomePage() {
       ref={homeRef}
       className="relative min-h-screen pt-20 w-full overflow-hidden bg-transparent z-0"
     >
-      {/* Background */}
-      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        <LightPillar
-          topColor="#5227FF"
-          bottomColor="#FF9FFC"
-          intensity={1}
-          rotationSpeed={1}
-          glowAmount={0.002}
-          pillarWidth={3}
-          pillarHeight={0.4}
-          noiseIntensity={0.5}
-          pillarRotation={25}
-          interactive={false}
-          mixBlendMode="screen"
-          quality="medium"
-          isHomeVisible={isHomeVisible}
-        />
-      </div>
+      {/* Background Spotlight */}
+      <Spotlight
+        className="-top-40 left-0 md:left-60 md:-top-20"
+        fill="white"
+      />
 
       <div className="relative z-10 w-full flex items-center min-h-[calc(100vh-80px)]">
         <div className="w-full px-6 md:px-14 xl:px-24 2xl:px-32">
@@ -138,10 +126,13 @@ const HomePage = memo(function HomePage() {
             {/* RIGHT SIDE */}
             <div
               ref={rightRef}
-              className="flex justify-center lg:justify-end"
-              style={{ opacity: 0, willChange: "transform, opacity" }}
+              className="relative hidden lg:flex w-full h-[600px] justify-end"
+              style={{ opacity: 0 }}
             >
-              
+              <SplineScene 
+                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                className="w-full h-full absolute inset-0 pointer-events-auto"
+              />
             </div>
 
           </div>
